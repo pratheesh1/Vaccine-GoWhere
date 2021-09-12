@@ -11,6 +11,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     style: () => {
       return {
         color: "blue",
+        weight: 2,
+        dashArray: "10, 5",
+        dashOffset: "5",
       };
     },
     onEachFeature: (feature, layer) => {
@@ -30,12 +33,32 @@ window.addEventListener("DOMContentLoaded", async () => {
     style: () => {
       return {
         color: "orange",
+        weight: 1,
       };
     },
     onEachFeature: (feature, layer) => {
+      //  TODO: remove this pop-up to add with others
       layer.bindPopup(feature.properties.NAME_2);
     },
   });
   districDataLayer.addTo(districtBoundariesLayer);
   map.addLayer(districtBoundariesLayer);
+
+  //map layer toggle
+  let baseLayer = {
+      "State Boundaries": stateBoundariesLayer,
+    },
+    otherLayers = {
+      "District Boundaries": districtBoundariesLayer,
+    };
+
+  let controlLayer = L.control.layers(baseLayer, otherLayers, {
+    position: "bottomright",
+  });
+  controlLayer.addTo(map);
+
+  //non-map element styling
+  document.querySelector("#show-hide-search").addEventListener("click", () => {
+    toggleDisplay("#floating-search");
+  });
 });

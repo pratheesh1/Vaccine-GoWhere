@@ -14,8 +14,3 @@ function toggleDisplay(elementID) {
     selectedElement.classList.add("d-none");
   }
 }
-
-// styling
-document.querySelector("#show-hide-search").addEventListener("click", () => {
-  toggleDisplay("#floating-search");
-});

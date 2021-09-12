@@ -8,11 +8,10 @@ const mapBoxToken =
  * Return new map instance given ID, coordinates and zoom*/
 function createMap(divID, coordinates, zoom) {
   // create map instance
-  var map = L.map(
-    divID,
-    (zoomControl = false),
-    (attributionControl = false)
-  ).setView(coordinates, zoom);
+  var map = L.map(divID, { attributionControl: false }).setView(
+    coordinates,
+    zoom
+  );
   // create tile layer
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
