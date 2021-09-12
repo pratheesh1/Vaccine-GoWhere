@@ -162,7 +162,10 @@
               <span class="d-none d-sm-inline mx-1"
                 ><i class="far fa-user-circle"></i> Developer</span
               >
-              <a href="#" class="d-inline d-sm-none mx-1 text-light"
+              <a
+                href="#"
+                id="show-hide-search"
+                class="d-inline d-sm-none mx-1 text-light"
                 ><i class="fas fa-search"></i
               ></a>
             </div>
@@ -172,7 +175,33 @@
           <main class="row overflow-auto">
             <!-- TODO: All main -->
             <!-- Main content here -->
-            <div id="map"></div>
+            <div id="map" class="p-0"></div>
+
+            <div class="container">
+              <div
+                class="
+                  row
+                  height
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                "
+              >
+                <div
+                  id="floating-search"
+                  class="d-none d-sm-block col-11 col-lg-5 col-xl-4"
+                >
+                  <div class="search">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Type to start search"
+                    />
+                    <button class="btn btn-primary">Search</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </main>
         </div>
       </div>
@@ -197,6 +226,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <!-- JS -->
+    <script src="scripts/map.js"></script>
     <script src="scripts/style.js"></script>
     <script src="scripts/script.js"></script>
   </body>

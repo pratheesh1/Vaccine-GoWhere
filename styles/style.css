@@ -27,12 +27,31 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+main {
+  position: relative;
+}
+
 #map {
   height: calc(100vh - var(--xs-adjust-height));
+}
 
-  /* TODO: remove test after debugging */
-  /* tests */
-  background-color: var(--test-primary-color);
+.search {
+  z-index: 40000;
+  position: relative;
+}
+#floating-search {
+  position: absolute;
+  top: 9px;
+  left: 35px;
+}
+
+.search button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  height: 36px;
+  width: 80px;
+  background: blue;
 }
 
 /* -- Custom CSS for bootstrap breakpoints (reference size and above) -- */
