@@ -3,6 +3,9 @@
 const mapBoxToken =
   "pk.eyJ1IjoicHJhdGhlZXNoMSIsImEiOiJja3Q1NzE3b2owNW1uMnVwN3llbmUyajhnIn0.bGFsIBVXDrEsRdacm-aBzg";
 
+/** @function
+ * @name createMap
+ * Return new map instance given ID, coordinates and zoom*/
 function createMap(divID, coordinates, zoom) {
   // create map instance
   var map = L.map(

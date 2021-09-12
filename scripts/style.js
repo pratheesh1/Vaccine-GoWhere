@@ -1,5 +1,6 @@
 // JS for styling
 
+// functions
 /** @function
  * @name toggleDisplay
  * Toggle display property of given element*/
