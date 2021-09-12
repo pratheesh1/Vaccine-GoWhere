@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <!-- font awesome CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>COVID-19 India</title>
+  </head>
+  <body>
+    <div class="container-fluid overflow-hidden">
+      <div class="row vh-100 overflow-auto">
+        <div
+          class="
+            col-12 col-sm-3 col-xl-2
+            px-0 px-sm-2
+            bg-light
+            d-flex
+            sticky-top
+            shadow
+          "
+        >
+          <div
+            class="
+              d-flex
+              flex-sm-column flex-row flex-grow-1
+              align-items-center align-items-sm-start
+              px-3
+              pt-2
+            "
+          >
+            <a
+              href="#"
+              class="
+                d-flex
+                align-items-center
+                mt-1
+                pb-sm-3
+                mb-md-0
+                me-md-auto
+                text-decoration-none
+              "
+            >
+              <span
+                class="
+                  m-1 m-sm-0
+                  p-1 p-sm-3
+                  fs-5
+                  shadow-sm
+                  rounded-pill
+                  border-promary
+                "
+                ><i class="fas fa-hospital-user"></i
+                ><span class="d-none d-sm-inline"> Vaccine GoWhere</span></span
+              >
+            </a>
+            <ul
+              class="
+                nav
+                flex-sm-column
+                flex-row
+                flex-nowrap
+                flex-shrink-1
+                flex-sm-grow-0
+                flex-grow-1
+                mb-sm-auto mb-0
+                justify-content-center
+                align-items-center align-items-sm-start
+                pt-sm-4
+              "
+              id="menu"
+            >
+              <li class="nav-item">
+                <a href="#" class="nav-link px-sm-0 px-2"
+                  ><i class="fas fa-home"></i
+                  ><span class="ms-1 d-none d-sm-inline"> Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-sm-0 px-2">
+                  <i class="fas fa-shield-virus"></i>
+                  <span class="ms-1 d-none d-sm-inline"> Covid-19 Info</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-sm-0 px-2">
+                  <i class="fas fa-syringe"></i
+                  ><span class="ms-1 d-none d-sm-inline"> Vaccine</span></a
+                >
+              </li>
+              <li class="dropdown">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle px-sm-0 px-1"
+                  id="dropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-info-circle"></i
+                  ><span class="ms-1 d-none d-sm-inline">More Info</span>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-light text-small shadow"
+                  aria-labelledby="dropdown"
+                >
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://www.mygov.in/covid-19"
+                      ><i class="fab fa-500px"></i> GOV Info</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://www.cowin.gov.in/#Search-Vaccination-Center"
+                      ><i class="far fa-calendar-check"></i> Book Vaccination
+                      Appointment</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="https://www.mohfw.gov.in/covid_vaccination/vaccination/faqs.html#about-the-vaccine"
+                      ><i class="far fa-question-circle"></i> Vaccine FAQ</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-sm-0 px-2">
+                  <i class="far fa-chart-bar"></i
+                  ><span class="ms-1 d-none d-sm-inline"> Statistics</span></a
+                >
+              </li>
+            </ul>
+            <div class="py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+              <span class="d-none d-sm-inline mx-1"
+                ><i class="far fa-user-circle"></i> Developer</span
+              >
+              <a href="#" class="d-inline d-sm-none mx-1 text-light"
+                ><i class="fas fa-search"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-column h-sm-100">
+          <main class="row overflow-auto">
+            <!-- TODO: All main -->
+            <!-- Main content here -->
+            <div id="map"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <!-- Axios JS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"
+      integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- JS -->
+    <script src="scripts/style.js"></script>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>

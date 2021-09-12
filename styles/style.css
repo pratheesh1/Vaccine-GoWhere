@@ -1,0 +1,63 @@
+/* Google font import */
+@import url("https://fonts.googleapis.com/css2?family=Kaisei+Tokumin&family=Montserrat&display=swap");
+
+/* -- root styling and global variables -- */
+:root {
+  /* TODO: need clean-up for unused and test variables*/
+  /* CSS Global variables */
+  --default-backbround-color: white;
+  --test-primary-color: turquoise;
+  --test-secondary-color: blue;
+  /* col-2 based on bootstrap xs breakpoint */
+  --xs-adjust-height: 58px;
+  /* CSS root styling */
+}
+
+/* -- CSS for all elemets -- */
+*,
+/* ::before/::after and *::before/*::after have the same effect - apply to all */
+*::before,
+*::after {
+  box-sizing: border-box;
+  color: black;
+}
+
+body {
+  font-family: "Kaisei Tokumin", serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+#map {
+  height: calc(100vh - var(--xs-adjust-height));
+
+  /* TODO: remove test after debugging */
+  /* tests */
+  background-color: var(--test-primary-color);
+}
+
+/* -- Custom CSS for bootstrap breakpoints (reference size and above) -- */
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .h-sm-100 {
+    height: 100%;
+  }
+  #map {
+    height: 100vh;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+}
