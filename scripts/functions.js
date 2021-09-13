@@ -65,15 +65,15 @@ async function getDetails(centerID) {
         {
           data: [
             {
-              x: "13 Sept",
+              x: "13-Sept",
               y: [1, 5],
             },
             {
-              x: "14 Sept",
+              x: "14-Sept",
               y: [4, 6],
             },
             {
-              x: "15 Sept",
+              x: "15-Sept",
               y: [5, 8],
             },
           ],
