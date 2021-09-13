@@ -1,7 +1,7 @@
 /* Google font import */
 @import url("https://fonts.googleapis.com/css2?family=Kaisei+Tokumin&family=Montserrat&display=swap");
 
-/* -- root styling and global variables -- */
+/* --------- root styling and global variables --------- */
 :root {
   /* TODO: need clean-up for unused and test variables*/
   /* CSS Global variables */
@@ -13,7 +13,7 @@
   /* CSS root styling */
 }
 
-/* -- CSS for all elemets -- */
+/* --------- CSS for all elemets --------- */
 *,
 /* ::before/::after and *::before/*::after have the same effect - apply to all */
 *::before,
@@ -54,7 +54,7 @@ main {
   background: blue;
 }
 
-/* -- Custom CSS for bootstrap breakpoints (reference size and above) -- */
+/* --------- Custom CSS for bootstrap breakpoints (reference size and above) --------- */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .h-sm-100 {

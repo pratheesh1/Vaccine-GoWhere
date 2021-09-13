@@ -2,10 +2,10 @@
 const COWIN_BASE_API_URL = "https://cdn-api.co-vin.in/api";
 
 window.addEventListener("DOMContentLoaded", async () => {
-  // create new map
+  //create new map
   let map = createMap("map", [20.627352373712213, 77.99359383369028], 4.5);
 
-  //state boundaries group
+  //--------- state boundaries group ---------
   let stateBoundariesLayer = L.layerGroup();
   let stateGeojsonData = (await axios.get("data/geojson/states_india.geojson"))
     .data;
@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   stateDataLayer.addTo(stateBoundariesLayer);
   map.addLayer(stateBoundariesLayer);
 
-  //district boundaries group
+  //--------- district boundaries group ---------
   let districtBoundariesLayer = L.layerGroup();
   let districtGeojsonData = (
     await axios.get("data/geojson/districts_india.geojson")
@@ -42,6 +42,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     style: () => {
       return {
         color: "orange",
+        fillColor: "#ffffff",
         weight: 1,
       };
     },
@@ -57,39 +58,56 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   map.addLayer(districtBoundariesLayer);
 
-  //cowin api query layer
+  //--------- cowin api query layer ---------
   var vacinationCenterLayer = L.markerClusterGroup();
 
+  /** @function
+   * @name findByLatLong
+   * Find vaccination center by lat, lng*/
   async function findByLatLong(lat, lng) {
     const API_END_POINT_URL_findByLatLong =
       "/v2/appointment/centers/public/findByLatLong";
     var apiResponse = await axios.get(
-      COWIN_BASE_API_URL +
-        API_END_POINT_URL_findByLatLong +
-        "?lat=" +
-        lat +
-        "&long=" +
-        lng
+      COWIN_BASE_API_URL + API_END_POINT_URL_findByLatLong,
+      { params: { lat: lat, long: lng } }
     );
     return apiResponse.data;
   }
 
+  /** @function
+   * @name getVaccineCenter
+   * Add vaccine center markers on the map*/
   async function getVaccineCenter() {
     var mapCenter = map.getCenter();
+    vacinationCenterLayer.clearLayers();
     var apiReturn = await findByLatLong(mapCenter.lat, mapCenter.lng);
     var vaccineCenter = apiReturn.centers;
     vaccineCenter.forEach((element) => {
+      let popup = document.createElement("div");
+      popup.innerHTML =
+        '<div id="popup" class="justify-content-center"><h6>' +
+        element.name +
+        "</h6><p>Location: " +
+        element.location +
+        "<br>District: " +
+        element.district_name +
+        ", Center ID: " +
+        element.center_id +
+        //add getDetails() on click
+        '</p><button type="button" onclick="getDetails(' +
+        element.center_id +
+        ')"class="btn btn-primary">Check Availability</button></div>';
+
       L.marker([element.lat, element.long], {
         icon: vaccinationCenterIcon,
       })
         .addTo(vacinationCenterLayer)
-        //TODO: modify this popup
-        .bindPopup(element.name);
+        .bindPopup(popup, { keepInView: true, closeButton: true });
     });
   }
   map.addLayer(vacinationCenterLayer);
 
-  //map layer toggle
+  //--------- map layer control ---------
   //on zoom
   map.on("zoom", () => {
     var zoomLevel = map.getZoom();
@@ -107,25 +125,27 @@ window.addEventListener("DOMContentLoaded", async () => {
     );
   });
 
-  //on move
-  map.on("move", () => {
-    vacinationCenterLayer.clearLayers();
+  //on moveend
+  map.on("moveend", () => {
     getVaccineCenter();
   });
 
-  //layers
+  //--------- layers ---------
   let baseLayer = {
       "State Boundaries": stateBoundariesLayer,
     },
     otherLayers = {
       "District Boundaries": districtBoundariesLayer,
+      "Vaccination Centers": vacinationCenterLayer,
     };
   let controlLayer = L.control.layers(baseLayer, otherLayers, {
     position: "bottomright",
   });
   controlLayer.addTo(map);
 
-  //non-map element styling
+  //--------- map element  ---------
+
+  //--------- non-map element  ---------
   document.querySelector("#show-hide-search").addEventListener("click", () => {
     toggleDisplay("#floating-search");
   });
