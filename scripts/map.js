@@ -29,3 +29,16 @@ function createMap(divID, coordinates, zoom) {
   // returns map with tile layer
   return map;
 }
+
+// custom leaflet marker class
+var LeafIcon = L.Icon.extend({
+  options: {
+    iconSize: [40, 40],
+    iconAnchor: [0, 0],
+    popupAnchor: [0, -0],
+  },
+});
+
+var vaccinationCenterIcon = new LeafIcon({
+  iconUrl: "images/vaccine.png",
+});
