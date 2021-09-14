@@ -59,7 +59,7 @@ async function getDetails(centerID) {
 
   if (resData.centers) {
     element.innerHTML = "";
-    //TODO: dummy data - add chart here
+    //TODO: dummy data - add proper chart data here
     var options = {
       series: [
         {
@@ -67,10 +67,6 @@ async function getDetails(centerID) {
             {
               x: "13-Sept",
               y: [1, 5],
-            },
-            {
-              x: "14-Sept",
-              y: [4, 6],
             },
             {
               x: "15-Sept",
@@ -106,5 +102,28 @@ async function getDetails(centerID) {
     setTimeout(() => {
       element.innerHTML = initialData;
     }, 2000);
+  }
+}
+
+/** @function
+ * @name searchLocation
+ * Returns list of locations that match query string*/
+async function searchLocation(query) {
+  const API_END_POINT_URL_search = "/search";
+  var searchDiv = document.querySelector("#search-results");
+  searchDiv.innerHTML = "";
+  if (query.length >= 3) {
+    let resData = (
+      await axios.get(NOMONATIM_BASE_API_URL + API_END_POINT_URL_search, {
+        params: { countrycodes: "in", q: query, format: "jsonv2" },
+      })
+    ).data;
+
+    //TODO: modify this code for proper display of search results
+    resData.forEach((element) => {
+      searchDiv.innerHTML += element.display_name + "<hr>";
+    });
+  } else {
+    alert("At least 3 character required for search!");
   }
 }

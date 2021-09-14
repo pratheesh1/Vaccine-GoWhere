@@ -1,5 +1,6 @@
 //API Base url
 const COWIN_BASE_API_URL = "https://cdn-api.co-vin.in/api";
+const NOMONATIM_BASE_API_URL = "https://nominatim.openstreetmap.org";
 
 window.addEventListener("DOMContentLoaded", async () => {
   //create new map
@@ -144,6 +145,10 @@ window.addEventListener("DOMContentLoaded", async () => {
   controlLayer.addTo(map);
 
   //--------- map element  ---------
+  document.querySelector("#search-btn").addEventListener("click", () => {
+    var searchQuery = document.querySelector("#search-query").value;
+    searchLocation(searchQuery);
+  });
 
   //--------- non-map element  ---------
   document.querySelector("#show-hide-search").addEventListener("click", () => {
