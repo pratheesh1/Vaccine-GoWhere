@@ -37,7 +37,7 @@ main {
 
 #floating-search {
   position: absolute;
-  top: 9px;
+  top: 10px;
   left: 35px;
   z-index: 40000;
 }
@@ -81,8 +81,9 @@ main {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 }
-.search {
-  position: relative;
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */
