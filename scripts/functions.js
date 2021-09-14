@@ -48,7 +48,7 @@ async function getDetails(centerID) {
 
   var initialData = element.innerHTML;
 
-  element.innerHTML += "<br>Loading...";
+  element.innerHTML = "Loading...";
   var resData = (
     await axios.get(COWIN_BASE_API_URL + API_END_POINT_URL_calendarByCenter, {
       params: { center_id: centerID, date: getCurrentDate() },
@@ -98,7 +98,7 @@ async function getDetails(centerID) {
     let button = document.createElement("div");
     button.innerHTML =
       '<div class="d-flex justify-content-center">' +
-      '<button class="btn btn-primary">Goto Booking</button></div>';
+      '<button class="btn btn-primary">Book Slot</button></div>';
     element.appendChild(button);
   } else {
     //else display no data for 2sec
