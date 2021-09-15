@@ -1,6 +1,6 @@
 //API Base url
 const COWIN_BASE_API_URL = "https://cdn-api.co-vin.in/api";
-const NOMONATIM_BASE_API_URL = "https://nominatim.openstreetmap.org";
+const NOMINATIM_BASE_API_URL = "https://nominatim.openstreetmap.org";
 
 window.addEventListener("DOMContentLoaded", async () => {
   //create new map
@@ -85,19 +85,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     var vaccineCenter = apiReturn.centers;
     vaccineCenter.forEach((element) => {
       let popup = document.createElement("div");
-      popup.innerHTML =
-        '<div id="popup" class="justify-content-center"><h6>' +
-        element.name +
-        "</h6><p>Location: " +
-        element.location +
-        "<br>District: " +
-        element.district_name +
-        ", Center ID: " +
-        element.center_id +
-        //add getDetails() on click
-        '</p><button type="button" onclick="getDetails(' +
-        element.center_id +
-        ')"class="btn btn-primary">Check Availability</button></div>';
+      popup.innerHTML = `<div id="popup" class="justify-content-center"><h6>
+        ${element.name}</h6><p>Location: ${element.location}<br>District:
+        ${element.district_name} , Center ID: ${element.center_id}
+        </p><button type="button" onclick="getDetails(${element.center_id})"class="btn btn-primary">Check Availability</button></div>`;
 
       L.marker([element.lat, element.long], {
         icon: vaccinationCenterIcon,
@@ -107,6 +98,15 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
   map.addLayer(vacinationCenterLayer);
+
+  //--------- search results layer ---------
+  var searchResultsLayer = L.layerGroup();
+  document.querySelector("#search-btn").addEventListener("click", async () => {
+    var searchQuery = document.querySelector("#search-query").value;
+    createSearchResMarkers(searchQuery, searchResultsLayer, map);
+  });
+
+  map.addLayer(searchResultsLayer);
 
   //--------- map layer control ---------
   //on zoom
@@ -145,13 +145,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   controlLayer.addTo(map);
 
   //--------- map element  ---------
-  document.querySelector("#search-btn").addEventListener("click", () => {
-    var searchQuery = document.querySelector("#search-query").value;
-    searchLocation(searchQuery);
-  });
 
   //--------- non-map element  ---------
+  //show/hide search
   document.querySelector("#show-hide-search").addEventListener("click", () => {
     toggleDisplay("#floating-search");
+  });
+
+  //clear search results on click outside
+  document.querySelector("#map").addEventListener("click", () => {
+    document.querySelector("#search-results").innerHTML = "";
   });
 });

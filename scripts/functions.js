@@ -54,7 +54,7 @@ async function getDetails(centerID) {
       params: { center_id: centerID, date: getCurrentDate() },
     })
   ).data;
-  //TODO: remove this log after debugging
+  //TODO: add available slots data and remove this log after debugging
   console.log(resData);
 
   if (resData.centers) {
@@ -107,23 +107,53 @@ async function getDetails(centerID) {
 
 /** @function
  * @name searchLocation
- * Returns list of locations that match query string*/
+ * - Returns list of locations that match query string
+ * - Clears search results div and appends new results*/
 async function searchLocation(query) {
   const API_END_POINT_URL_search = "/search";
-  var searchDiv = document.querySelector("#search-results");
-  searchDiv.innerHTML = "";
   if (query.length >= 3) {
     let resData = (
-      await axios.get(NOMONATIM_BASE_API_URL + API_END_POINT_URL_search, {
-        params: { countrycodes: "in", q: query, format: "jsonv2" },
+      await axios.get(NOMINATIM_BASE_API_URL + API_END_POINT_URL_search, {
+        params: { countrycodes: "in", q: query, format: "jsonv2", limit: 15 },
       })
     ).data;
-
-    //TODO: modify this code for proper display of search results
-    resData.forEach((element) => {
-      searchDiv.innerHTML += element.display_name + "<hr>";
-    });
+    return resData;
   } else {
     alert("At least 3 character required for search!");
   }
+}
+
+/** @function
+ * @name createSearchResMarkers
+ * Create and display search result and result markers*/
+async function createSearchResMarkers(searchQuery, mapLayer, map) {
+  var searchResults = await searchLocation(searchQuery);
+  var searchDiv = document.querySelector("#search-results");
+  searchDiv.innerHTML = "";
+  searchResults.forEach((result) => {
+    //create markers
+    var coordinate = [result.lat, result.lon];
+    var marker = L.marker(coordinate);
+    marker.bindPopup(`<div>${result.display_name}</div>`);
+
+    marker.addTo(mapLayer);
+    //create and add results to search result div
+    var resultElement = document.createElement("div");
+    resultElement.classList = [
+      "container text-nowrap inline-block p-1 px-2 m-0",
+    ];
+    resultElement.innerHTML = result.display_name;
+    searchDiv.appendChild(resultElement);
+
+    //on click remove search results and fly to result
+    //wait 5sec and remove all search result markers
+    resultElement.addEventListener("click", () => {
+      searchDiv.innerHTML = "";
+      map.flyTo(coordinate, 10);
+      marker.openPopup();
+      setTimeout(() => {
+        mapLayer.clearLayers();
+      }, 5000);
+    });
+  });
 }
