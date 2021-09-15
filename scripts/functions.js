@@ -130,13 +130,26 @@ async function createSearchResMarkers(searchQuery, mapLayer, map) {
   var searchResults = await searchLocation(searchQuery);
   var searchDiv = document.querySelector("#search-results");
   searchDiv.innerHTML = "";
+
+  let markerArr = [];
   searchResults.forEach((result) => {
     //create markers
     var coordinate = [result.lat, result.lon];
-    var marker = L.marker(coordinate);
+    var marker = L.marker(coordinate, { icon: locationIcon }).on(
+      "click",
+      () => {
+        searchDiv.innerHTML = "";
+        map.flyTo(coordinate, 10);
+        marker.openPopup();
+        setTimeout(() => {
+          mapLayer.clearLayers();
+        }, 3500);
+      }
+    );
     marker.bindPopup(`<div>${result.display_name}</div>`);
-
     marker.addTo(mapLayer);
+    markerArr.push(marker);
+
     //create and add results to search result div
     var resultElement = document.createElement("div");
     resultElement.classList = [
@@ -145,15 +158,23 @@ async function createSearchResMarkers(searchQuery, mapLayer, map) {
     resultElement.innerHTML = result.display_name;
     searchDiv.appendChild(resultElement);
 
-    //on click remove search results and fly to result
-    //wait 5sec and remove all search result markers
+    //on click zoom to marker on map
     resultElement.addEventListener("click", () => {
       searchDiv.innerHTML = "";
       map.flyTo(coordinate, 10);
       marker.openPopup();
       setTimeout(() => {
         mapLayer.clearLayers();
-      }, 5000);
+      }, 3500);
     });
+  });
+
+  //fit to bounds on search based on all markers
+  var group = new L.featureGroup(markerArr);
+  map.fitBounds(group.getBounds(), {
+    zoom: {
+      animate: true,
+    },
+    pan: { duration: 0.75, animate: true },
   });
 }

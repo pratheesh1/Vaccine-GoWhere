@@ -42,3 +42,8 @@ var LeafIcon = L.Icon.extend({
 var vaccinationCenterIcon = new LeafIcon({
   iconUrl: "images/vaccine.png",
 });
+
+var locationIcon = new LeafIcon({
+  iconSize: [24, 40],
+  iconUrl: "images/search_location.png",
+});
