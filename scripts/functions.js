@@ -171,10 +171,5 @@ async function createSearchResMarkers(searchQuery, mapLayer, map) {
 
   //fit to bounds on search based on all markers
   var group = new L.featureGroup(markerArr);
-  map.fitBounds(group.getBounds(), {
-    zoom: {
-      animate: true,
-    },
-    pan: { duration: 0.75, animate: true },
-  });
+  map.flyTo(group.getBounds().getCenter(), 7);
 }

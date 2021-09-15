@@ -152,8 +152,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     toggleDisplay("#floating-search");
   });
 
-  //clear search results on click outside
+  //clear search results on click outside or idle for too long
   document.querySelector("#map").addEventListener("click", () => {
     document.querySelector("#search-results").innerHTML = "";
   });
+
+  var timeoutid = 0;
+  document
+    .querySelector("#search-results")
+    .addEventListener("mousemove", () => {
+      clearTimeout(timeoutid);
+      timeoutid = setTimeout(() => {
+        document.querySelector("#search-results").innerHTML = "";
+      }, 2000);
+    });
 });
