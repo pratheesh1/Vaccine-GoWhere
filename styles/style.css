@@ -20,6 +20,7 @@
 *::after {
   box-sizing: border-box;
   color: black;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -63,6 +64,10 @@ main {
   border-radius: 0 0 5px 5px;
   max-height: 70vh;
   font-size: 14px;
+}
+
+#vaccine-image {
+  height: 40px;
 }
 
 /* --------- Custom CSS for bootstrap breakpoints (reference size and above) --------- */

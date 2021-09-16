@@ -59,42 +59,12 @@ async function getDetails(centerID) {
 
   if (resData.centers) {
     element.innerHTML = "";
-    //TODO: dummy data - add proper chart data here
-    var options = {
-      series: [
-        {
-          data: [
-            {
-              x: "13-Sept",
-              y: [1, 5],
-            },
-            {
-              x: "15-Sept",
-              y: [5, 8],
-            },
-          ],
-        },
-      ],
-      chart: {
-        type: "rangeBar",
-        height: 150,
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-        },
-      },
-      dataLabels: {
-        enabled: true,
-      },
-    };
-    //create and append button to continue with booking
-    var chart = new ApexCharts(element, options);
-    chart.render();
     let button = document.createElement("div");
     button.innerHTML =
-      '<div class="d-flex justify-content-center">' +
-      '<button class="btn btn-primary">Book Slot</button></div>';
+      '<div class="container-flex text-center">' +
+      '<img id="vaccine-image" src="images/vaccine_calendar.png">' +
+      '<p class="m-0 mt-1 mb-2">Vaccination slots are availavle at this center.</p>' +
+      '<button class="btn btn-sm btn-primary">Continue to booking</button></div>';
     element.appendChild(button);
   } else {
     //else display no data for 2sec

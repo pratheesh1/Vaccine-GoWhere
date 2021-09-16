@@ -199,8 +199,8 @@
         <div class="col d-flex flex-column h-sm-100">
           <main class="row overflow-auto">
             <!-- Main content here -->
-            <!-- Map Group -->
-            <div id="map-container" class="p-0 main-display-element">
+            <!-- Map -->
+            <section id="map-container" class="p-0 main-display-element">
               <div id="map">
                 <div
                   class="
@@ -235,26 +235,190 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- TODO: charts page -->
-            <div id="info" class="d-none p-0 main-display-element bg-warning">
-              <!-- TODO: div for new page for single page view toggle -->
-              Info
-            </div>
-            <div
+            </section>
+            <!-- covid-19 info -->
+            <section id="info" class="d-none p-0 main-display-element">
+              <nav
+                class="
+                  navbar
+                  d-flex
+                  justify-content-around
+                  bg-light
+                  py-2 py-md-4
+                  sticky-top
+                  shadow
+                "
+              >
+                <ul class="nav">
+                  <li class="nav-item border-end px-md-5">
+                    <a class="nav-link fw-light" href="#virus-info">COVID-19</a>
+                  </li>
+                  <li class="nav-item border-end px-md-5">
+                    <a class="nav-link fw-light" href="#symptom-treatment"
+                      >Symptoms</a
+                    >
+                  </li>
+                  <li class="nav-item px-md-5">
+                    <a class="nav-link fw-light" href="#latest-info"
+                      >Latest Info</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <div class="mt-2 mt-md-0" data-bs-offset="0">
+                <div class="p-3 p-md-5" id="virus-info">
+                  <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                      <div class="col-md">
+                        <img
+                          src="images/coronavirus-covid-19.png"
+                          class="img-fluid"
+                          alt="coronavirus-covid-19"
+                        />
+                      </div>
+                      <div class="col-md">
+                        <h2>COVID-19 Virus</h2>
+                        <p class="lead">
+                          What are Coronaviruses and what is COVID-19?
+                        </p>
+                        <p>
+                          Coronaviruses (CoV) are a large family of viruses
+                          causing illnesses ranging from the common cold to
+                          pneumonia (a more severe lung infection). COVID-19 is
+                          the infectious disease caused by a strain of
+                          coronavirus, SARS-CoV-2. It was declared a pandemic by
+                          the World Health Organization in March 2020 and has
+                          spread globally.
+                        </p>
+                        <p>
+                          Current evidence suggests that transmission of
+                          COVID-19 occurs primarily through the respiratory
+                          droplets of infected people, which are expelled when
+                          an infected person coughs, sneezes, talks or sings.
+                          These respiratory droplets can reach the eyes, nose or
+                          mouth of a susceptible person directly or indirectly
+                          (via contaminated surfaces), resulting in infection.
+                        </p>
+                        <p class="text-muted">
+                          <small
+                            >*Extracted from moh.gov.sg on Sept 16 2021</small
+                          >
+                        </p>
+                        <a
+                          href="https://www.moh.gov.sg/covid-19/general"
+                          class="btn btn-dark mt-2"
+                          ><i class="text-light fas fa-chevron-right"></i> Read
+                          More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-3 p-md-5 bg-dark" id="symptom-treatment">
+                  <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                      <div class="col-md">
+                        <h2 class="text-light">Symptoms and Treatment</h2>
+                        <p class="lead text-light">
+                          What are the symptoms of COVID-19?
+                        </p>
+                        <p class="text-light">
+                          The symptoms of COVID-19 infection are similar to that
+                          of an acute respiratory infection or pneumonia. These
+                          symptoms include fever, cough, runny nose, sore
+                          throat, loss of taste or smell.
+                        </p>
+                        <p class="lead text-light">
+                          What is the treatment for COVID-19?
+                        </p>
+                        <p class="text-light">
+                          COVID-19 is generally managed with supportive
+                          treatment provided based on the patient’s clinical
+                          condition. Treatments and drugs for COVID-19 continue
+                          to be monitored, and recommendations may further
+                          evolve over time.
+                        </p>
+                        <p class="text-muted">
+                          <small class="text-muted"
+                            >*Extracted from moh.gov.sg on Sept 16 2021</small
+                          >
+                        </p>
+                        <a
+                          href="https://www.moh.gov.sg/covid-19/general"
+                          class="btn btn-light mt-2"
+                          ><i class="fas fa-chevron-right"></i> Read More</a
+                        >
+                      </div>
+
+                      <div class="col-md">
+                        <img
+                          src="images/symptoms.png"
+                          class="img-fluid"
+                          alt="coronavirus-covid-19"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-3 p-md-5" id="latest-info">
+                  <div class="container">
+                    <div class="row align-items-center justify-content-between">
+                      <div class="col-md">
+                        <img
+                          src="images/information.png"
+                          class="img-fluid"
+                          alt="coronavirus-covid-19"
+                        />
+                      </div>
+                      <div class="col-md">
+                        <h2>Latest Information</h2>
+                        <p class="lead">
+                          Where do I get the latest information on the disease
+                          situation?
+                        </p>
+                        <p>
+                          Health advisories and the latest information on the
+                          local disease situation are available on the Singapore
+                          Ministry of Health website at www.mygov.in/covid-19.
+                          For the latest global disease situation, you may wish
+                          to refer to information on the World Health
+                          Organization website at www.who.int.
+                        </p>
+
+                        <p class="text-muted">
+                          <small
+                            >*Extracted from moh.gov.sg on Sept 16 2021</small
+                          >
+                        </p>
+                        <a
+                          href="https://www.moh.gov.sg/covid-19/general"
+                          class="btn btn-dark mt-2"
+                          ><i class="text-light fas fa-chevron-right"></i> Read
+                          More</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- vaccine -->
+            <section
               id="vaccine"
               class="d-none p-0 main-display-element bg-primary"
             >
               <!-- TODO: div for new page for single page view toggle -->
               vaccine
-            </div>
-            <div
+            </section>
+            <!-- statistics -->
+            <section
               id="statistics"
               class="d-none p-0 main-display-element bg-success"
             >
               <!-- TODO: div for new page for single page view toggle -->
               Statistics
-            </div>
+            </section>
           </main>
         </div>
       </div>
