@@ -104,19 +104,30 @@
               id="menu"
             >
               <li class="nav-item">
-                <a href="#" class="nav-link px-sm-0 px-2"
+                <a
+                  href="#"
+                  onclick="togglePage('#map-container')"
+                  class="nav-link px-sm-0 px-2"
                   ><i class="fas fa-home"></i
                   ><span class="ms-1 d-none d-sm-inline"> Home</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link px-sm-0 px-2">
+                <a
+                  href="#"
+                  onclick="togglePage('#info')"
+                  class="nav-link px-sm-0 px-2"
+                >
                   <i class="fas fa-shield-virus"></i>
                   <span class="ms-1 d-none d-sm-inline"> Covid-19 Info</span>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link px-sm-0 px-2">
+                <a
+                  href="#"
+                  onclick="togglePage('#vaccine')"
+                  class="nav-link px-sm-0 px-2"
+                >
                   <i class="fas fa-syringe"></i
                   ><span class="ms-1 d-none d-sm-inline"> Vaccine</span></a
                 >
@@ -162,7 +173,11 @@
                 </ul>
               </li>
               <li>
-                <a href="#" class="nav-link px-sm-0 px-2">
+                <a
+                  href="#"
+                  onclick="togglePage('#statistics')"
+                  class="nav-link px-sm-0 px-2"
+                >
                   <i class="far fa-chart-bar"></i
                   ><span class="ms-1 d-none d-sm-inline"> Statistics</span></a
                 >
@@ -185,10 +200,8 @@
           <main class="row overflow-auto">
             <!-- Main content here -->
             <!-- Map Group -->
-            <div class="p-0">
-              <div id="map" class="main-display-element"></div>
-              <!-- Search -->
-              <div class="container">
+            <div id="map-container" class="p-0 main-display-element">
+              <div id="map">
                 <div
                   class="
                     row
@@ -224,8 +237,23 @@
               </div>
             </div>
             <!-- TODO: charts page -->
-            <div id="graph" class="d-none p-0 main-display-element bg-warning">
+            <div id="info" class="d-none p-0 main-display-element bg-warning">
               <!-- TODO: div for new page for single page view toggle -->
+              Info
+            </div>
+            <div
+              id="vaccine"
+              class="d-none p-0 main-display-element bg-primary"
+            >
+              <!-- TODO: div for new page for single page view toggle -->
+              vaccine
+            </div>
+            <div
+              id="statistics"
+              class="d-none p-0 main-display-element bg-success"
+            >
+              <!-- TODO: div for new page for single page view toggle -->
+              Statistics
             </div>
           </main>
         </div>

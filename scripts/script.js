@@ -21,7 +21,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       };
     },
     onEachFeature: (feature, layer) => {
-      //  TODO: remove this pop-up to add with others
       layer.bindPopup(feature.properties.st_nm);
     },
   });
@@ -75,10 +74,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     return apiResponse.data;
   }
 
-  /** @function
-   * @name getVaccineCenter
-   * Add vaccine center markers on the map*/
-  async function getVaccineCenter() {
+  //On map moveend update vaccination center and plot on map
+  map.on("moveend", async () => {
     var mapCenter = map.getCenter();
     vacinationCenterLayer.clearLayers();
     var apiReturn = await findByLatLong(mapCenter.lat, mapCenter.lng);
@@ -96,7 +93,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         .addTo(vacinationCenterLayer)
         .bindPopup(popup, { keepInView: true, closeButton: true });
     });
-  }
+  });
   map.addLayer(vacinationCenterLayer);
 
   //--------- search results layer ---------
@@ -124,11 +121,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       districDataLayer.removeFrom(districtBoundariesLayer),
       stateDataLayer.addTo(stateBoundariesLayer)
     );
-  });
-
-  //on moveend
-  map.on("moveend", () => {
-    getVaccineCenter();
   });
 
   //--------- layers ---------
@@ -166,4 +158,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         document.querySelector("#search-results").innerHTML = "";
       }, 2000);
     });
+
+  /** @function
+   * @name togglePage
+   * Toggle pages for single page display*/
+  togglePage = (page) => {
+    document.querySelectorAll(".main-display-element").forEach((element) => {
+      element.classList.add("d-none");
+    });
+    document.querySelector(page).classList.remove("d-none");
+  };
 });
