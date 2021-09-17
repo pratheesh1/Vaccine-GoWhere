@@ -67,9 +67,9 @@ async function getDetails(centerID) {
       '<button class="btn btn-sm btn-primary">Continue to booking</button></div>';
     element.appendChild(button);
   } else {
-    //else display no data for 2sec
     element.innerText =
       "No pre-booking services available at this centre. Walk-in only!";
+    //revert after 2 sec
     setTimeout(() => {
       element.innerHTML = initialData;
     }, 2000);
