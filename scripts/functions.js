@@ -63,12 +63,13 @@ async function getDetails(centerID) {
     button.innerHTML =
       '<div class="container-flex text-center">' +
       '<img id="vaccine-image" src="images/vaccine_calendar.png">' +
-      '<p class="m-0 mt-1 mb-2">Vaccination slots are availavle at this center.</p>' +
+      '<p class="m-0 mt-1 mb-2">Vaccination booking services are availavle at this center.</p>' +
       '<button class="btn btn-sm btn-primary">Continue to booking</button></div>';
     element.appendChild(button);
   } else {
     //else display no data for 2sec
-    element.innerText = "No Data available!";
+    element.innerText =
+      "No pre-booking services available at this centre. Walk-in only!";
     setTimeout(() => {
       element.innerHTML = initialData;
     }, 2000);
