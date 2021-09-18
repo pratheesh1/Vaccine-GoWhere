@@ -71,15 +71,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     },
   };
 
-  //--------- plots for historic cases data ---------
-  let historicData = await loadData(HISTORIC_DATA_API_URL);
-
-  //--------- plots for daily cases data ---------
+  //load data
+  var historicData = await loadData(HISTORIC_DATA_API_URL);
   var currentData = await loadData(DAILY_DATA_API_URL);
+
   var totalTally = currentData.TT;
   //remove TT (Total tally) from API data
   delete currentData.TT;
 
+  //create selection
   var currentDayaKey = Object.keys(currentData);
   var currentDataState = currentDayaKey.map((elem) => {
     return stateMap[elem].name;
@@ -94,46 +94,223 @@ document.addEventListener("DOMContentLoaded", async function () {
     selectionList.innerHTML += stateOption;
   });
 
-  var confirmed = currentDayaKey.map((element) => {
-    return currentData[element].total.confirmed;
+  /** @function
+   * @name renderChart
+   * Renders chart*/
+  function renderChart(update = "") {
+    //--------- plots for historic cases data ---------
+    var selection = selectionList.value ? selectionList.value : "TT";
+
+    var totalCases = historicData[selection].dates;
+    var totalCasesDate = Object.keys(totalCases);
+
+    //chart label
+    var totalCaseslabel = totalCasesDate.map((e) => {
+      return Date.parse(e);
+    });
+
+    //data for chart1
+    var confirmedCases = totalCasesDate.map((e) => {
+      return totalCases[e].total.confirmed ? totalCases[e].total.confirmed : 0;
+    });
+
+    //data for chart2
+    var recoveredCases = totalCasesDate.map((e) => {
+      return totalCases[e].total.recovered ? totalCases[e].total.recovered : 0;
+    });
+    var activeCases = [];
+    for (let i = 0; i < confirmedCases.length; i++) {
+      activeCases.push(confirmedCases[i] - recoveredCases[i]);
+    }
+
+    //data for chart3
+    var fatalCases = totalCasesDate.map((e) => {
+      return totalCases[e].total.deceased ? totalCases[e].total.deceased : 0;
+    });
+
+    //chart1 options
+    var chart1Options = {
+      chart: {
+        id: "chart1-row-1",
+        group: "total",
+        type: "area",
+        height: 160,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      fill: {
+        opacity: 1,
+      },
+      series: [
+        {
+          name: "Total Cases",
+          data: confirmedCases,
+        },
+      ],
+      labels: totalCaseslabel,
+      yaxis: {
+        min: 0,
+      },
+      xaxis: {
+        type: "datetime",
+      },
+      colors: ["#DCE6EC"],
+      title: {
+        text: confirmedCases[confirmedCases.length - 1],
+        offsetX: 30,
+        style: {
+          fontSize: "24px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+      subtitle: {
+        text: "Total confirmed cases",
+        offsetX: 30,
+        style: {
+          fontSize: "14px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+    };
+
+    //chart2 options
+    var chart2Options = {
+      chart: {
+        id: "chart2-row-1",
+        group: "total",
+        type: "area",
+        height: 160,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      fill: {
+        opacity: 1,
+      },
+      series: [
+        {
+          name: "Recovered",
+          data: recoveredCases,
+        },
+        {
+          name: "Active",
+          data: activeCases,
+        },
+      ],
+      labels: totalCaseslabel,
+      yaxis: {
+        min: 0,
+      },
+      xaxis: {
+        type: "datetime",
+      },
+      colors: ["#DCE6EC", "#008FFB"],
+      title: {
+        text: activeCases[activeCases.length - 1],
+        offsetX: 30,
+        style: {
+          fontSize: "24px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+      subtitle: {
+        text: "Total active cases",
+        offsetX: 30,
+        style: {
+          fontSize: "14px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+    };
+
+    //chart3 options
+    var chart3Options = {
+      chart: {
+        id: "chart3-row-1",
+        group: "total",
+        type: "area",
+        height: 160,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      fill: {
+        opacity: 1,
+      },
+      series: [
+        {
+          name: "Death",
+          data: fatalCases,
+        },
+      ],
+      labels: totalCaseslabel,
+      yaxis: {
+        min: 0,
+      },
+      xaxis: {
+        type: "datetime",
+      },
+      colors: ["#FFA07A"],
+      title: {
+        text: fatalCases[fatalCases.length - 1],
+        offsetX: 30,
+        style: {
+          fontSize: "24px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+      subtitle: {
+        text: "Total death",
+        offsetX: 30,
+        style: {
+          fontSize: "14px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+    };
+
+    var chart1 = new ApexCharts(
+      document.querySelector("#chart1-row1"),
+      chart1Options
+    );
+    var chart2 = new ApexCharts(
+      document.querySelector("#chart2-row1"),
+      chart2Options
+    );
+    chart1;
+    var chart3 = new ApexCharts(
+      document.querySelector("#chart3-row1"),
+      chart3Options
+    );
+
+    var allCharts = [chart1, chart2, chart3];
+
+    allCharts.forEach((e) => {
+      e.render();
+    });
+  }
+
+  renderChart();
+
+  //re-render charts based on selction
+  document.querySelector("#select-state").addEventListener("change", () => {
+    var chartElement = document.querySelector("#chart-wrapper");
+    chartElement.classList.add("d-none");
+
+    renderChart(1);
+    //wait 0.5 sec for all charts to re-render before display
+    setTimeout(() => {
+      chartElement.classList.remove("d-none");
+    }, 500);
   });
-  var deceased = currentDayaKey.map((element) => {
-    return currentData[element].total.deceased;
-  });
-  var recovered = currentDayaKey.map((element) => {
-    return currentData[element].total.recovered;
-  });
-
-  // TODO: remove this log after debugging
-  console.log(currentData, currentDataState, totalTally);
-
-  //--------- create and render all charts ---------
-
-  /**
- *TODO: Group charts
-chart: {
-    id: "uniqueID",
-    group: "group ID",
- */
-
-  // var chart1 = new ApexCharts(document.querySelector("#chart1-row1"), options1);
-  // var chart2 = new ApexCharts(document.querySelector("#chart2-row1"), options2);
-
-  // chart1.render();
-  // chart2.render();
-  /**
-   * //FIXME:Update after all chart data done
-  var chart1 = new ApexCharts(document.querySelector("#chart1-row1"), chart1Options);
-  var chart2 = new ApexCharts(document.querySelector("#chart2-row1"), chart2Options);
-  var chart3 = new ApexCharts(document.querySelector("#chart3-row1"), chart3Options);
-  var chart4 = new ApexCharts(document.querySelector("#chart1-row2"), chart4Options);
-  var chart5 = new ApexCharts(document.querySelector("#chart2-row2"), chart5Options);
-  var chart6 = new ApexCharts(document.querySelector("#chart1-row3"), chart5Options);
-  var chart7 = new ApexCharts(document.querySelector("#chart2-row3"), chart6Options); 
-
-  var charts = [chart1, chart2, chart3, chart4, chart5, chart6, chart7];
-  charts.forEach((eachChart) => {
-    eachChart.render();
-  });
-*/
 });
