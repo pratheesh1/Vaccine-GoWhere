@@ -80,23 +80,27 @@ document.addEventListener("DOMContentLoaded", async function () {
   //remove TT (Total tally) from API data
   delete currentData.TT;
 
-  document.querySelector("#state-selection");
-
-  // <option value="1">One</option>
-  // <option value="2">Two</option>
-  // <option value="3">Three</option>
-
-  var CurrentDataKey = Object.keys(currentData);
-  var currentDataState = CurrentDataKey.map((elem) => {
+  var currentDayaKey = Object.keys(currentData);
+  var currentDataState = currentDayaKey.map((elem) => {
     return stateMap[elem].name;
   });
-  var confirmed = CurrentDataKey.map((element) => {
+
+  let selectionList = document.querySelector("#select-state");
+
+  currentDayaKey.forEach((state) => {
+    var stateOption = `<option value=${state} aria-label=${
+      currentDataState[currentDayaKey.indexOf(state)]
+    }>${currentDataState[currentDayaKey.indexOf(state)]}</option>`;
+    selectionList.innerHTML += stateOption;
+  });
+
+  var confirmed = currentDayaKey.map((element) => {
     return currentData[element].total.confirmed;
   });
-  var deceased = CurrentDataKey.map((element) => {
+  var deceased = currentDayaKey.map((element) => {
     return currentData[element].total.deceased;
   });
-  var recovered = CurrentDataKey.map((element) => {
+  var recovered = currentDayaKey.map((element) => {
     return currentData[element].total.recovered;
   });
 
