@@ -98,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async function () {
    * @name renderChart
    * Renders chart*/
   function renderChart() {
-    //--------- plots for historic cases data ---------
     var selection = selectionList.value ? selectionList.value : "TT";
 
     var totalCases = historicData[selection].dates;
@@ -606,12 +605,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.addEventListener("resize", function () {
       updateChartOptions();
     });
-
-    //re-render charts based on selction
-    document.querySelector("#select-state").addEventListener("change", () => {
-      //TODO: add chart render on change
-    });
   }
 
   renderChart();
+  //re-render charts based on selction
+  document.querySelector("#select-state").addEventListener("change", () => {
+    var chartElement = document.querySelector("#chart-wrapper");
+    chartElement.classList.add("d-none");
+    renderChart();
+    //wait 0.5 sec for all charts to re-render before display
+    setTimeout(() => {
+      chartElement.classList.remove("d-none");
+    }, 500);
+  });
 });
