@@ -128,6 +128,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       return totalCases[e].total.deceased ? totalCases[e].total.deceased : 0;
     });
 
+    //data for chart4
+    var vaccinationOneDose = totalCasesDate.map((e) => {
+      return totalCases[e].total.vaccinated1
+        ? totalCases[e].total.vaccinated1
+        : 0;
+    });
+    var vaccinationTwoDose = totalCasesDate.map((e) => {
+      return totalCases[e].total.vaccinated2
+        ? totalCases[e].total.vaccinated2
+        : 0;
+    });
+
     //chart1 options
     var chart1Options = {
       chart: {
@@ -279,6 +291,77 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
     };
 
+    // //chart4 options
+    var chart4Options = {
+      chart: {
+        type: "bar",
+        height: 380,
+        width: "100%",
+        stacked: true,
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "45%",
+        },
+      },
+      series: [
+        {
+          name: "One Dose",
+          data: vaccinationOneDose,
+        },
+        {
+          name: "Two Dose",
+          data: vaccinationOneDose,
+        },
+      ],
+      labels: totalCaseslabel,
+      xaxis: {
+        labels: {
+          show: true,
+        },
+        type: "datetime",
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: true,
+        },
+      },
+      yaxis: {
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+        labels: {
+          style: {
+            colors: "#78909c",
+          },
+        },
+      },
+      subtitle: {
+        text: "Vaccinated",
+        offsetX: 0,
+        offsetY: 50,
+        style: {
+          fontSize: "14px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+      title: {
+        text: [
+          `Single Dose: ${vaccinationOneDose[vaccinationOneDose.length - 1]}`,
+          `Both Doses: ${vaccinationTwoDose[vaccinationTwoDose.length - 1]}`,
+        ],
+        align: "left",
+        style: {
+          fontSize: "18px",
+        },
+      },
+    };
+
+    // create charts
     var chart1 = new ApexCharts(
       document.querySelector("#chart1-row1"),
       chart1Options
@@ -293,7 +376,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       chart3Options
     );
 
-    var allCharts = [chart1, chart2, chart3];
+    var chart4 = new ApexCharts(
+      document.querySelector("#chart1-row2"),
+      chart4Options
+    );
+
+    var allCharts = [chart1, chart2, chart3, chart4];
 
     allCharts.forEach((e) => {
       e.render();
