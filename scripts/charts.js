@@ -178,15 +178,16 @@ document.addEventListener("DOMContentLoaded", async function () {
       colors: ["#DCE6EC"],
       title: {
         text: confirmedCases[confirmedCases.length - 1],
-        offsetX: 30,
+        offsetX: 0,
+        offsetY: 5,
         style: {
-          fontSize: "24px",
+          fontSize: "18px",
           cssClass: "apexcharts-yaxis-title",
         },
       },
       subtitle: {
         text: "Total confirmed cases",
-        offsetX: 30,
+        offsetX: 0,
         style: {
           fontSize: "14px",
           cssClass: "apexcharts-yaxis-title",
@@ -231,15 +232,16 @@ document.addEventListener("DOMContentLoaded", async function () {
       colors: ["#DCE6EC", "#008FFB"],
       title: {
         text: activeCases[activeCases.length - 1],
-        offsetX: 30,
+        offsetX: 0,
+        offsetY: 5,
         style: {
-          fontSize: "24px",
+          fontSize: "18px",
           cssClass: "apexcharts-yaxis-title",
         },
       },
       subtitle: {
         text: "Total active cases",
-        offsetX: 30,
+        offsetX: 0,
         style: {
           fontSize: "14px",
           cssClass: "apexcharts-yaxis-title",
@@ -280,15 +282,16 @@ document.addEventListener("DOMContentLoaded", async function () {
       colors: ["#FFA07A"],
       title: {
         text: fatalCases[fatalCases.length - 1],
-        offsetX: 30,
+        offsetX: 0,
+        offsetY: 5,
         style: {
-          fontSize: "24px",
+          fontSize: "18px",
           cssClass: "apexcharts-yaxis-title",
         },
       },
       subtitle: {
         text: "Total death",
-        offsetX: 30,
+        offsetX: 0,
         style: {
           fontSize: "14px",
           cssClass: "apexcharts-yaxis-title",
@@ -348,12 +351,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       subtitle: {
         text: [
           "Vaccine doses administered",
-          "",
           `Single Dose: ${vaccinationOneDose[vaccinationOneDose.length - 1]}`,
           `Both Doses: ${vaccinationTwoDose[vaccinationTwoDose.length - 1]}`,
         ],
         offsetX: 0,
-        offsetY: 20,
+        offsetY: 40,
         style: {
           fontSize: "14px",
           cssClass: "apexcharts-yaxis-title",
@@ -363,10 +365,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         text:
           vaccinationOneDose[vaccinationOneDose.length - 1] +
           vaccinationTwoDose[vaccinationTwoDose.length - 1],
-        align: "left",
         style: {
           fontSize: "18px",
         },
+        offsetX: 0,
+        offsetY: 20,
       },
     };
 
@@ -382,17 +385,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
       plotOptions: {
         pie: {
-          customScale: 0.8,
+          customScale: 0.9,
           donut: {
             size: "75%",
           },
-          offsetY: 20,
-        },
-        stroke: {
-          colors: undefined,
+          offsetY: -40,
         },
       },
-      colors: undefined,
       title: {
         text: "Testing",
         offsetY: 20,
@@ -401,6 +400,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
       },
       subtitle: {
+        offsetX: 0,
+        offsetY: 50,
         text: [
           "Infection Rate:",
           `${(
@@ -409,8 +410,6 @@ document.addEventListener("DOMContentLoaded", async function () {
             100
           ).toFixed(3)} %`,
         ],
-        offsetX: 30,
-        offsetY: 230,
         style: {
           fontSize: "16px",
           cssClass: "apexcharts-yaxis-title",
@@ -454,24 +453,165 @@ document.addEventListener("DOMContentLoaded", async function () {
       chart5Options
     );
 
+    //render all charts
     var allCharts = [chart1, chart2, chart3, chart4, chart5];
-
     allCharts.forEach((e) => {
       e.render();
+    });
+
+    /** @function
+     * @name updateChartOptions
+     * Update chartoptions based on vw*/
+    var updateChartOptions = function () {
+      var chartsRow1 = [chart1, chart2, chart3];
+      if (screen.width > 577 && screen.width <= 992) {
+        //update chart for iPad
+        //chart 1-3
+        chartsRow1.forEach((e) => {
+          e.updateOptions({
+            chart: {
+              height: 200,
+            },
+            title: {
+              offsetX: -10,
+              style: {
+                fontSize: "24px",
+              },
+            },
+            subtitle: {
+              offsetX: -10,
+            },
+          });
+        });
+
+        //chart 4
+        chart4.updateOptions({
+          subtitle: {
+            text: [
+              "Vaccine doses administered",
+              "",
+              `Single Dose: ${
+                vaccinationOneDose[vaccinationOneDose.length - 1]
+              }`,
+              `Both Doses: ${
+                vaccinationTwoDose[vaccinationTwoDose.length - 1]
+              }`,
+            ],
+            offsetX: 0,
+            offsetY: 50,
+            style: {
+              fontSize: "14px",
+            },
+          },
+          title: {
+            style: {
+              fontSize: "24px",
+            },
+            offsetX: 0,
+            offsetY: 20,
+          },
+        });
+
+        //chart 5
+        chart5.updateOptions({
+          plotOptions: {
+            pie: {
+              offsetY: 20,
+            },
+          },
+          subtitle: {
+            offsetX: 0,
+            offsetY: 50,
+          },
+          title: {
+            style: {
+              fontSize: "24px",
+            },
+          },
+          legend: {
+            position: "bottom",
+            offsetX: 20,
+            offsetY: 0,
+          },
+        });
+      } else if (screen.width > 992) {
+        //update chart for large screen
+        //chart 1-3
+        chartsRow1.forEach((e) => {
+          e.updateOptions({
+            chart: {
+              height: 260,
+            },
+            title: {
+              offsetX: 30,
+              style: {
+                fontSize: "24px",
+              },
+            },
+            subtitle: {
+              offsetX: 30,
+            },
+          });
+        });
+
+        //chart 4
+        chart4.updateOptions({
+          subtitle: {
+            text: [
+              "Vaccine doses administered",
+              "",
+              `Single Dose: ${
+                vaccinationOneDose[vaccinationOneDose.length - 1]
+              }`,
+              `Both Doses: ${
+                vaccinationTwoDose[vaccinationTwoDose.length - 1]
+              }`,
+            ],
+            offsetX: 0,
+            offsetY: 50,
+            style: {
+              fontSize: "14px",
+            },
+          },
+          title: {
+            style: {
+              fontSize: "24px",
+            },
+            offsetX: 0,
+            offsetY: 20,
+          },
+        });
+
+        //chart 5
+        chart5.updateOptions({
+          plotOptions: {
+            pie: {
+              offsetY: 20,
+            },
+          },
+          subtitle: {
+            offsetX: 30,
+            offsetY: 230,
+          },
+          title: {
+            style: {
+              fontSize: "24px",
+            },
+          },
+        });
+      }
+    };
+
+    updateChartOptions();
+    window.addEventListener("resize", function () {
+      updateChartOptions();
+    });
+
+    //re-render charts based on selction
+    document.querySelector("#select-state").addEventListener("change", () => {
+      //TODO: add chart render on change
     });
   }
 
   renderChart();
-
-  //re-render charts based on selction
-  document.querySelector("#select-state").addEventListener("change", () => {
-    var chartElement = document.querySelector("#chart-wrapper");
-    chartElement.classList.add("d-none");
-
-    renderChart();
-    //wait 0.5 sec for all charts to re-render before display
-    setTimeout(() => {
-      chartElement.classList.remove("d-none");
-    }, 500);
-  });
 });
