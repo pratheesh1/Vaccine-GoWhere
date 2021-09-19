@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   /** @function
    * @name renderChart
    * Renders chart*/
-  function renderChart(update = "") {
+  function renderChart() {
     //--------- plots for historic cases data ---------
     var selection = selectionList.value ? selectionList.value : "TT";
 
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     var chartElement = document.querySelector("#chart-wrapper");
     chartElement.classList.add("d-none");
 
-    renderChart(1);
+    renderChart();
     //wait 0.5 sec for all charts to re-render before display
     setTimeout(() => {
       chartElement.classList.remove("d-none");
