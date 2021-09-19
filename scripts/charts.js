@@ -140,6 +140,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         : 0;
     });
 
+    //data for chart5
+    var testsDone = totalCasesDate.map((e) => {
+      return totalCases[e].total.tested ? totalCases[e].total.tested : 0;
+    });
+
     //chart1 options
     var chart1Options = {
       chart: {
@@ -291,7 +296,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       },
     };
 
-    // //chart4 options
+    //chart4 options
     var chart4Options = {
       chart: {
         type: "bar",
@@ -341,23 +346,86 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
       },
       subtitle: {
-        text: "Vaccinated",
+        text: [
+          "Vaccine doses administered",
+          "",
+          `Single Dose: ${vaccinationOneDose[vaccinationOneDose.length - 1]}`,
+          `Both Doses: ${vaccinationTwoDose[vaccinationTwoDose.length - 1]}`,
+        ],
         offsetX: 0,
-        offsetY: 50,
+        offsetY: 20,
         style: {
           fontSize: "14px",
           cssClass: "apexcharts-yaxis-title",
         },
       },
       title: {
-        text: [
-          `Single Dose: ${vaccinationOneDose[vaccinationOneDose.length - 1]}`,
-          `Both Doses: ${vaccinationTwoDose[vaccinationTwoDose.length - 1]}`,
-        ],
+        text:
+          vaccinationOneDose[vaccinationOneDose.length - 1] +
+          vaccinationTwoDose[vaccinationTwoDose.length - 1],
         align: "left",
         style: {
           fontSize: "18px",
         },
+      },
+    };
+
+    //chart5 options
+    var chart5Options = {
+      chart: {
+        type: "donut",
+        width: "100%",
+        height: 400,
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      plotOptions: {
+        pie: {
+          customScale: 0.8,
+          donut: {
+            size: "75%",
+          },
+          offsetY: 20,
+        },
+        stroke: {
+          colors: undefined,
+        },
+      },
+      colors: undefined,
+      title: {
+        text: "Testing",
+        offsetY: 20,
+        style: {
+          fontSize: "18px",
+        },
+      },
+      subtitle: {
+        text: [
+          "Infection Rate:",
+          `${(
+            (confirmedCases[confirmedCases.length - 1] /
+              testsDone[testsDone.length - 1]) *
+            100
+          ).toFixed(3)} %`,
+        ],
+        offsetX: 30,
+        offsetY: 230,
+        style: {
+          fontSize: "16px",
+          cssClass: "apexcharts-yaxis-title",
+        },
+      },
+      series: [
+        testsDone[testsDone.length - 1] -
+          confirmedCases[confirmedCases.length - 1],
+        confirmedCases[confirmedCases.length - 1],
+      ],
+      labels: ["Total Tests", "Positive cases"],
+      legend: {
+        position: "left",
+        offsetX: 40,
+        offsetY: 80,
       },
     };
 
@@ -381,7 +449,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       chart4Options
     );
 
-    var allCharts = [chart1, chart2, chart3, chart4];
+    var chart5 = new ApexCharts(
+      document.querySelector("#chart2-row2"),
+      chart5Options
+    );
+
+    var allCharts = [chart1, chart2, chart3, chart4, chart5];
 
     allCharts.forEach((e) => {
       e.render();
