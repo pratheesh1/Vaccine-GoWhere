@@ -238,7 +238,10 @@
               </div>
             </section>
             <!-- statistics -->
-            <section id="statistics" class="p-0 main-display-element bg-light">
+            <section
+              id="statistics"
+              class="d-none p-0 main-display-element bg-light"
+            >
               <div class="col text-center px-4 pt-2 px-md-5 py-md-3">
                 <!-- select state -->
                 <div class="row my-1 my-md-3 my-lg-4 py-lg-4 text-start">
@@ -457,9 +460,12 @@
               </div>
             </section>
             <!-- vaccine -->
-            <section id="vaccine" class="p-0 main-display-element bg-primary">
+            <section
+              id="vaccine"
+              class="d-none p-0 main-display-element bg-success"
+            >
               <!-- TODO: div for new page for single page view toggle -->
-              vaccine
+              Vaccine
             </section>
           </main>
         </div>
@@ -478,7 +484,9 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">
+                COVID-19 Vaccination Appointment
+              </h5>
               <button
                 type="button"
                 class="btn-close"
@@ -486,7 +494,19 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
+            <!-- vaccination appointmant inside modal -->
+            <div class="modal-body" id="modal-body">
+              <div
+                class="container-flex text-start pb-3"
+                id="appointmment-information"
+              ></div>
+              <datetime-slot-picker
+                placeholder="Pick a date and time slot"
+                time-slots-text="Time Slot"
+                no-slots-text="No slots available"
+              >
+              </datetime-slot-picker>
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -495,7 +515,13 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">Understood</button>
+              <button
+                type="button"
+                class="btn btn-primary disabled"
+                id="confirm-booking"
+              >
+                Confirm Booking
+              </button>
             </div>
           </div>
         </div>
@@ -529,6 +555,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <!-- datetime-slot-picker JavaScript -->
+    <script src="https://unpkg.com/datetime-slot-picker/dist/datetime-slot-picker/datetime-slot-picker.js"></script>
     <!-- JS -->
     <script src="scripts/functions.js"></script>
     <script src="scripts/map.js"></script>

@@ -74,6 +74,15 @@ main {
   z-index: 2000;
 }
 
+/* styling for calendar */
+.neo-cell-enabled:hover,
+.neo-day-enabled:hover {
+  background-color: #a1e8eb;
+}
+.neo-cell-selected {
+  background-color: #16ee45;
+}
+
 /* --------- Custom CSS for bootstrap breakpoints (reference size and above) --------- */
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {

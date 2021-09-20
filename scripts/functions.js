@@ -54,18 +54,116 @@ async function getDetails(centerID) {
       params: { center_id: centerID, date: getCurrentDate() },
     })
   ).data;
-  //TODO: add available slots data and remove this log after debugging
-  console.log(resData);
 
   if (resData.centers) {
+    let data = resData.centers;
+
+    //update pop-up
     element.innerHTML = "";
     let button = document.createElement("div");
     button.innerHTML =
       '<div class="container-flex text-center">' +
       '<img id="vaccine-image" src="images/vaccine_calendar.png">' +
       '<p class="m-0 mt-1 mb-2">Vaccination booking services are availavle at this center.</p>' +
-      '<button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue to booking</button></div>';
+      '<button class="btn btn-sm btn-primary" data-bs-toggle="modal" id="continue-booking" data-bs-target="#staticBackdrop">Continue to booking</button></div>';
     element.appendChild(button);
+
+    //show static elements hidden by previous user interaction
+    document
+      .getElementById("continue-booking")
+      .addEventListener("click", () => {
+        document.querySelector("#confirm-booking").classList.remove("d-none");
+        document
+          .querySelector("#modal-details-span")
+          .classList.remove("d-none");
+        slotPicker.classList.remove("d-none");
+      });
+
+    //update appointmment information
+    var appointmmentInfoElement = document.querySelector(
+      "#appointmment-information"
+    );
+    var updatedHtml =
+      `<h6>Vaccination Center: ${data.name}</h6>` +
+      `<text class="small">Center ID: ${data.center_id}<span id="modal-details-span">` +
+      `<br>Address: ${data.address}, ${data.district_name}, ${data.state_name}` +
+      `<br>Vaccine: ${data.sessions[0].vaccine}, Vaccination Cost: ${data.fee_type}</span></text>`;
+    appointmmentInfoElement.innerHTML = updatedHtml;
+
+    //on confirm booking display results
+    var bookingDetails = [];
+    let slotPicker = document.querySelector("datetime-slot-picker");
+    slotPicker.addEventListener("slotUpdate", function (event) {
+      bookingDetails.push(event.detail);
+      document.querySelector("#confirm-booking").classList.remove("disabled");
+    });
+    document.querySelector("#confirm-booking").addEventListener("click", () => {
+      //hide certain elements and disable continue booking btn on successful booking
+      document.getElementById("continue-booking").classList.add("disabled");
+      document.querySelector("#confirm-booking").classList.add("d-none");
+      document.querySelector("#modal-details-span").classList.add("d-none");
+      slotPicker.classList.add("d-none");
+      document.querySelector("#confirm-booking").classList.add("disabled");
+      bookingDetails = [];
+
+      //TODO: add information about booking into confirmation message
+      var booking = bookingDetails[bookingDetails.length - 1];
+    });
+
+    /** @function
+     * @name getFormattedDateStr
+     * Return formatted date for datetime-slot-picker JS*/
+    getFormattedDateStr = function (dateStr) {
+      var dateArr = dateStr.split("-").map((e) => {
+        return parseInt(e);
+      });
+      var dateObj = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
+
+      const dayIndex = {
+        0: "Sun",
+        1: "Mon",
+        2: "Tue",
+        3: "Wed",
+        4: "Thu",
+        5: "Fri",
+        6: "Sat",
+      };
+      const monthIndex = {
+        0: "Jan",
+        1: "Feb",
+        2: "Mar",
+        3: "Apr",
+        4: "May",
+        5: "Jun",
+        6: "Jul",
+        7: "Aug",
+        8: "Sep",
+        9: "Oct",
+        10: "Nov",
+        11: "Dec",
+      };
+
+      var formattedDate =
+        dayIndex[dateObj.getDay()] +
+        ", " +
+        dateArr[0] +
+        " " +
+        monthIndex[dateArr[1] - 1] +
+        " " +
+        dateArr[2];
+      return formattedDate;
+    };
+
+    //option for datetime-slot-picker
+    var slots = data.sessions.map((e) => {
+      var date = getFormattedDateStr(e.date);
+      var timeSlots = e.slots;
+      return { date, timeSlots };
+    });
+
+    //update datetime-slot-picker DOM element
+    const datetimeSlotPicker = document.querySelector("datetime-slot-picker");
+    datetimeSlotPicker.slots = slots;
   } else {
     element.innerText =
       "No pre-booking services available at this centre. Walk-in only!";
