@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   var historicData = await loadData(HISTORIC_DATA_API_URL);
   var currentData = await loadData(DAILY_DATA_API_URL);
 
-  var totalTally = currentData.TT;
   //remove TT (Total tally) from API data
   delete currentData.TT;
 
@@ -98,51 +97,88 @@ document.addEventListener("DOMContentLoaded", async function () {
    * @name renderChart
    * Renders chart*/
   function renderChart() {
-    var selection = selectionList.value ? selectionList.value : "TT";
+    /** @function
+     * @name getData
+     * Returns data for chart options*/
+    getData = function () {
+      var selection = selectionList.value ? selectionList.value : "TT";
 
-    var totalCases = historicData[selection].dates;
-    var totalCasesDate = Object.keys(totalCases);
+      var totalCases = historicData[selection].dates;
+      var totalCasesDate = Object.keys(totalCases);
 
-    //chart label
-    var totalCaseslabel = totalCasesDate.map((e) => {
-      return Date.parse(e);
-    });
+      //chart label
+      var totalCaseslabel = totalCasesDate.map((e) => {
+        return Date.parse(e);
+      });
 
-    //data for chart1
-    var confirmedCases = totalCasesDate.map((e) => {
-      return totalCases[e].total.confirmed ? totalCases[e].total.confirmed : 0;
-    });
+      //data for chart1
+      var confirmedCases = totalCasesDate.map((e) => {
+        return totalCases[e].total.confirmed
+          ? totalCases[e].total.confirmed
+          : 0;
+      });
 
-    //data for chart2
-    var recoveredCases = totalCasesDate.map((e) => {
-      return totalCases[e].total.recovered ? totalCases[e].total.recovered : 0;
-    });
-    var activeCases = [];
-    for (let i = 0; i < confirmedCases.length; i++) {
-      activeCases.push(confirmedCases[i] - recoveredCases[i]);
-    }
+      //data for chart2
+      var recoveredCases = totalCasesDate.map((e) => {
+        return totalCases[e].total.recovered
+          ? totalCases[e].total.recovered
+          : 0;
+      });
+      var activeCases = [];
+      for (let i = 0; i < confirmedCases.length; i++) {
+        activeCases.push(confirmedCases[i] - recoveredCases[i]);
+      }
 
-    //data for chart3
-    var fatalCases = totalCasesDate.map((e) => {
-      return totalCases[e].total.deceased ? totalCases[e].total.deceased : 0;
-    });
+      //data for chart3
+      var fatalCases = totalCasesDate.map((e) => {
+        return totalCases[e].total.deceased ? totalCases[e].total.deceased : 0;
+      });
 
-    //data for chart4
-    var vaccinationOneDose = totalCasesDate.map((e) => {
-      return totalCases[e].total.vaccinated1
-        ? totalCases[e].total.vaccinated1
-        : 0;
-    });
-    var vaccinationTwoDose = totalCasesDate.map((e) => {
-      return totalCases[e].total.vaccinated2
-        ? totalCases[e].total.vaccinated2
-        : 0;
-    });
+      //data for chart4
+      var vaccinationOneDose = totalCasesDate.map((e) => {
+        return totalCases[e].total.vaccinated1
+          ? totalCases[e].total.vaccinated1
+          : 0;
+      });
+      var vaccinationTwoDose = totalCasesDate.map((e) => {
+        return totalCases[e].total.vaccinated2
+          ? totalCases[e].total.vaccinated2
+          : 0;
+      });
 
-    //data for chart5
-    var testsDone = totalCasesDate.map((e) => {
-      return totalCases[e].total.tested ? totalCases[e].total.tested : 0;
-    });
+      //data for chart5
+      var testsDone = totalCasesDate.map((e) => {
+        return totalCases[e].total.tested ? totalCases[e].total.tested : 0;
+      });
+
+      return {
+        selection,
+        totalCases,
+        totalCasesDate,
+        totalCaseslabel,
+        confirmedCases,
+        recoveredCases,
+        activeCases,
+        fatalCases,
+        vaccinationOneDose,
+        vaccinationTwoDose,
+        testsDone,
+      };
+    };
+
+    var {
+      selection,
+      totalCases,
+      totalCasesDate,
+      totalCaseslabel,
+      confirmedCases,
+      recoveredCases,
+      activeCases,
+      fatalCases,
+      vaccinationOneDose,
+      vaccinationTwoDose,
+      testsDone,
+    } = getData();
 
     //chart1 options
     var chart1Options = {
@@ -441,12 +477,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       document.querySelector("#chart3-row1"),
       chart3Options
     );
-
     var chart4 = new ApexCharts(
       document.querySelector("#chart1-row2"),
       chart4Options
     );
-
     var chart5 = new ApexCharts(
       document.querySelector("#chart2-row2"),
       chart5Options
@@ -605,17 +639,57 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.addEventListener("resize", function () {
       updateChartOptions();
     });
+
+    //re-render charts based on selction
+    document.querySelector("#select-state").addEventListener("change", () => {
+      //TODO: add updateOptions based on state selection
+      var {
+        selection,
+        totalCases,
+        totalCasesDate,
+        totalCaseslabel,
+        confirmedCases,
+        recoveredCases,
+        activeCases,
+        fatalCases,
+        vaccinationOneDose,
+        vaccinationTwoDose,
+        testsDone,
+      } = getData();
+
+      console.log(
+        confirmedCases[confirmedCases.length - 1],
+        activeCases[activeCases.length - 1]
+      );
+
+      chart1.updateSeries([
+        {
+          data: confirmedCases,
+        },
+      ]);
+
+      ApexCharts.exec(chart1, "updateSeries", {
+        title: {
+          text: "Yay",
+        },
+      });
+
+      chart2.updateSeries([
+        {
+          data: recoveredCases,
+        },
+        {
+          data: activeCases,
+        },
+      ]);
+
+      ApexCharts.exec(chart2, "updateSeries", {
+        title: {
+          text: "Yay2",
+        },
+      });
+    });
   }
 
   renderChart();
-  //re-render charts based on selction
-  document.querySelector("#select-state").addEventListener("change", () => {
-    var chartElement = document.querySelector("#chart-wrapper");
-    chartElement.classList.add("d-none");
-    renderChart();
-    //wait 0.5 sec for all charts to re-render before display
-    setTimeout(() => {
-      chartElement.classList.remove("d-none");
-    }, 500);
-  });
 });
