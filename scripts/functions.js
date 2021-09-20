@@ -138,6 +138,12 @@ async function createSearchResMarkers(searchQuery, mapLayer, map) {
         mapLayer.clearLayers();
       }, 3500);
     });
+
+    //remove search results and markers after 10 sec
+    setTimeout(() => {
+      searchDiv.innerHTML = "";
+      mapLayer.clearLayers();
+    }, 10000);
   });
 
   //fit to bounds on search based on all markers

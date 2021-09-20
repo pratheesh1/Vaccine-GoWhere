@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         },
         {
           name: "Two Dose",
-          data: vaccinationOneDose,
+          data: vaccinationTwoDose,
         },
       ],
       labels: totalCaseslabel,
@@ -657,23 +657,27 @@ document.addEventListener("DOMContentLoaded", async function () {
         testsDone,
       } = getData();
 
+      //TODO: remove this log after debugging
       console.log(
-        confirmedCases[confirmedCases.length - 1],
-        activeCases[activeCases.length - 1]
+        "Expected title for Chart 1: " +
+          confirmedCases[confirmedCases.length - 1],
+        "Expected title for Chart 2: " + activeCases[activeCases.length - 1]
       );
 
+      // Update chart1
       chart1.updateSeries([
         {
           data: confirmedCases,
         },
       ]);
-
+      // FIXME: Not working - update chart title
       ApexCharts.exec(chart1, "updateSeries", {
         title: {
           text: "Yay",
         },
       });
 
+      // Update chart2
       chart2.updateSeries([
         {
           data: recoveredCases,
@@ -682,12 +686,70 @@ document.addEventListener("DOMContentLoaded", async function () {
           data: activeCases,
         },
       ]);
-
+      // FIXME: Not woking
       ApexCharts.exec(chart2, "updateSeries", {
         title: {
           text: "Yay2",
         },
       });
+
+      // Update chart3
+      chart3.updateSeries([
+        {
+          data: fatalCases,
+        },
+      ]);
+      // FIXME: Not woking
+      ApexCharts.exec(chart3, "updateSeries", {
+        title: {
+          text: "Yay3",
+        },
+      });
+
+      // Update chart4
+      chart4.updateSeries([
+        {
+          data: vaccinationOneDose,
+        },
+        {
+          data: vaccinationTwoDose,
+        },
+      ]);
+      // FIXME: Not woking
+      chart4.updateOptions([
+        {
+          subtitle: {
+            text: "OK",
+          },
+          title: {
+            text:
+              vaccinationOneDose[vaccinationOneDose.length - 1] +
+              vaccinationTwoDose[vaccinationTwoDose.length - 1],
+          },
+        },
+      ]);
+
+      // Update chart5
+      chart5.updateSeries([
+        testsDone[testsDone.length - 1] -
+          confirmedCases[confirmedCases.length - 1],
+        confirmedCases[confirmedCases.length - 1],
+      ]);
+      // FIXME: Not woking
+      chart5.updateOptions([
+        {
+          subtitle: {
+            text: [
+              "Infection Rate:",
+              `${(
+                (confirmedCases[confirmedCases.length - 1] /
+                  testsDone[testsDone.length - 1]) *
+                100
+              ).toFixed(3)} %`,
+            ],
+          },
+        },
+      ]);
     });
   }
 
