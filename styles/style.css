@@ -41,7 +41,7 @@ main {
   position: absolute;
   top: 11px;
   left: 35px;
-  z-index: 40000;
+  z-index: 1001;
 }
 
 .search {
@@ -68,6 +68,10 @@ main {
 
 #vaccine-image {
   height: 40px;
+}
+
+#staticBackdrop {
+  z-index: 2000;
 }
 
 /* --------- Custom CSS for bootstrap breakpoints (reference size and above) --------- */

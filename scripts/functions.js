@@ -64,7 +64,7 @@ async function getDetails(centerID) {
       '<div class="container-flex text-center">' +
       '<img id="vaccine-image" src="images/vaccine_calendar.png">' +
       '<p class="m-0 mt-1 mb-2">Vaccination booking services are availavle at this center.</p>' +
-      '<button class="btn btn-sm btn-primary">Continue to booking</button></div>';
+      '<button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Continue to booking</button></div>';
     element.appendChild(button);
   } else {
     element.innerText =
