@@ -5,7 +5,6 @@
 :root {
   /* TODO: need clean-up for unused and test variables*/
   /* CSS Global variables */
-  --default-backbround-color: white;
   --test-primary-color: turquoise;
   --test-secondary-color: blue;
   /* col-2 based on bootstrap xs breakpoint */
@@ -72,6 +71,17 @@ main {
 
 #staticBackdrop {
   z-index: 2000;
+}
+
+#vaccine-wrapper {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.vaccine {
+  flex: 0 0 auto;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 /* styling for calendar */

@@ -165,4 +165,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     document.querySelector(page).classList.remove("d-none");
   };
+
+  //horizontal scroll
+  const scrollContainer = document.querySelector("#vaccine-wrapper");
+  scrollContainer.addEventListener("wheel", (event) => {
+    if (screen.width >= 1200) {
+      event.preventDefault();
+      scrollContainer.scrollLeft += event.deltaY * 10;
+    }
+  });
 });

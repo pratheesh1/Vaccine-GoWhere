@@ -302,19 +302,19 @@
                 "
               >
                 <ul class="nav">
-                  <li class="nav-item border-end px-md-5">
+                  <li class="nav-item border-end px-md-4 px-lg-5">
                     <a class="nav-link fw-light" href="#virus-info-wrapper"
                       >COVID-19</a
                     >
                   </li>
-                  <li class="nav-item border-end px-md-5">
+                  <li class="nav-item border-end px-md-4 px-lg-5">
                     <a
                       class="nav-link fw-light"
                       href="#symptom-treatment-wrapper"
                       >Symptoms</a
                     >
                   </li>
-                  <li class="nav-item px-md-5">
+                  <li class="nav-item px-md-4 px-lg-5">
                     <a class="nav-link fw-light" href="#latest-info-wrapper"
                       >Latest Info</a
                     >
@@ -460,15 +460,26 @@
               </div>
             </section>
             <!-- vaccine -->
-            <section id="vaccine" class="p-0 main-display-element bg-success">
+            <section id="vaccine" class="p-0 main-display-element">
               <!-- TODO: div for new page for single page view toggle -->
-              Vaccine
+              <div id="vaccine-wrapper" class="d-inline d-lg-flex h-100">
+                <div class="vaccine col-12 d-inline d-lg-flex">
+                  <div class="col-12 col-lg-6 bg-white h-100">Col 1-1</div>
+                  <div class="col-12 col-lg-6 bg-dark h-100">Col 1-2</div>
+                </div>
+                <div class="vaccine col-12 d-inline d-lg-flex">
+                  <div class="col-12 col-lg-6 bg-white h-100">Col 2-1</div>
+                  <div class="col-12 col-lg-6 bg-dark h-100">Col 2-2</div>
+                </div>
+                <div class="vaccine col-12 d-inline d-lg-flex">
+                  <div class="col-12 col-lg-6 bg-white h-100">Col 3-1</div>
+                  <div class="col-12 col-lg-6 bg-dark h-100">Col 3-2</div>
+                </div>
             </section>
           </main>
         </div>
       </div>
       <!-- Modal for booking vaccination -->
-      <!-- TODO: Add modal for vaccination appointment booking -->
       <div
         class="modal fade"
         id="staticBackdrop"
