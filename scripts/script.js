@@ -139,10 +139,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   //--------- map element  ---------
 
   //--------- non-map element  ---------
-  //show/hide search
-  document.querySelector("#show-hide-search").addEventListener("click", () => {
-    toggleDisplay("#floating-search");
-  });
+  //show/hide searchbookingDetails
 
   //clear search results on click outside or idle for too long
   document.querySelector("#map").addEventListener("click", () => {

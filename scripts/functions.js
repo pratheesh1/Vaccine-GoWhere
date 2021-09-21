@@ -13,6 +13,10 @@ function toggleDisplay(elementID) {
   }
 }
 
+document.querySelector("#show-hide-search").addEventListener("click", () => {
+  toggleDisplay("#floating-search");
+});
+
 /** @function
  * @name getDate
  * Returns date string as DD-MM-YYYY*/
@@ -73,9 +77,6 @@ async function getDetails(centerID) {
       .getElementById("continue-booking")
       .addEventListener("click", () => {
         document.querySelector("#confirm-booking").classList.remove("d-none");
-        document
-          .querySelector("#modal-details-span")
-          .classList.remove("d-none");
         slotPicker.classList.remove("d-none");
       });
 
@@ -85,9 +86,9 @@ async function getDetails(centerID) {
     );
     var updatedHtml =
       `<h6>Vaccination Center: ${data.name}</h6>` +
-      `<text class="small">Center ID: ${data.center_id}<span id="modal-details-span">` +
+      `<text class="small">Center ID: ${data.center_id}` +
       `<br>Address: ${data.address}, ${data.district_name}, ${data.state_name}` +
-      `<br>Vaccine: ${data.sessions[0].vaccine}, Vaccination Cost: ${data.fee_type}</span></text>`;
+      `<br>Vaccine: ${data.sessions[0].vaccine}, Vaccination Cost: ${data.fee_type}</text>`;
     appointmmentInfoElement.innerHTML = updatedHtml;
 
     //on confirm booking display results
@@ -97,18 +98,31 @@ async function getDetails(centerID) {
       bookingDetails.push(event.detail);
       document.querySelector("#confirm-booking").classList.remove("disabled");
     });
+
     document.querySelector("#confirm-booking").addEventListener("click", () => {
       //hide certain elements and disable continue booking btn on successful booking
       document.getElementById("continue-booking").classList.add("disabled");
       document.querySelector("#confirm-booking").classList.add("d-none");
-      document.querySelector("#modal-details-span").classList.add("d-none");
       slotPicker.classList.add("d-none");
-      document.querySelector("#confirm-booking").classList.add("disabled");
-      bookingDetails = [];
 
-      //TODO: add information about booking into confirmation message
-      var booking = bookingDetails[bookingDetails.length - 1];
+      //display booking confirmation message
+      var bookedSlot = bookingDetails[bookingDetails.length - 1];
+      var bookingInfo =
+        `<h5>Booking Successful!</h5>` +
+        `<text class="small">Date:  ${bookedSlot.date}` +
+        `<br>Slot: ${bookedSlot.timeSlot}</text>`;
+      appointmmentInfoElement.innerHTML = bookingInfo;
+      ("");
     });
+
+    //when modal is closed reset the array and disble confirm button
+    document
+      .querySelector("#staticBackdrop")
+      .addEventListener("hidden.bs.modal", () => {
+        document.querySelector("#confirm-booking").classList.add("disabled");
+        bookingDetails = [];
+        appointmmentInfoElement.innerHTML = "";
+      });
 
     /** @function
      * @name getFormattedDateStr
