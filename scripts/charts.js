@@ -167,9 +167,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     };
 
     var {
-      selection,
-      totalCases,
-      totalCasesDate,
       totalCaseslabel,
       confirmedCases,
       recoveredCases,
@@ -642,12 +639,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     //re-render charts based on selction
     document.querySelector("#select-state").addEventListener("change", () => {
-      //TODO: add updateOptions based on state selection
+      //updateOptions based on state selection
+      //removed grouping for using updateOptions. Known apexchart bug
       var {
-        selection,
-        totalCases,
-        totalCasesDate,
-        totalCaseslabel,
         confirmedCases,
         recoveredCases,
         activeCases,
@@ -657,99 +651,98 @@ document.addEventListener("DOMContentLoaded", async function () {
         testsDone,
       } = getData();
 
-      //TODO: remove this log after debugging
-      console.log(
-        "Expected title for Chart 1: " +
-          confirmedCases[confirmedCases.length - 1],
-        "Expected title for Chart 2: " + activeCases[activeCases.length - 1]
-      );
-
       // Update chart1
-      chart1.updateSeries([
-        {
-          data: confirmedCases,
+      chart1.updateOptions({
+        chart: {
+          group: "total1",
         },
-      ]);
-      // FIXME: Not working - update chart title
-      ApexCharts.exec(chart1, "updateSeries", {
         title: {
-          text: "Yay",
+          text: confirmedCases[confirmedCases.length - 1],
         },
+        series: [
+          {
+            data: confirmedCases,
+          },
+        ],
       });
 
       // Update chart2
-      chart2.updateSeries([
-        {
-          data: recoveredCases,
+      chart2.updateOptions({
+        chart: {
+          group: "total2",
         },
-        {
-          data: activeCases,
-        },
-      ]);
-      // FIXME: Not woking
-      ApexCharts.exec(chart2, "updateSeries", {
+        series: [
+          {
+            data: recoveredCases,
+          },
+          {
+            data: activeCases,
+          },
+        ],
         title: {
-          text: "Yay2",
+          text: activeCases[activeCases.length - 1],
         },
       });
 
       // Update chart3
-      chart3.updateSeries([
-        {
-          data: fatalCases,
+      chart3.updateOptions({
+        chart: {
+          group: "total3",
         },
-      ]);
-      // FIXME: Not woking
-      ApexCharts.exec(chart3, "updateSeries", {
+        series: [
+          {
+            data: fatalCases,
+          },
+        ],
         title: {
-          text: "Yay3",
+          text: fatalCases[fatalCases.length - 1],
         },
       });
 
       // Update chart4
-      chart4.updateSeries([
-        {
-          data: vaccinationOneDose,
-        },
-        {
-          data: vaccinationTwoDose,
-        },
-      ]);
-      // FIXME: Not woking
-      chart4.updateOptions([
-        {
-          subtitle: {
-            text: "OK",
+      chart4.updateOptions({
+        series: [
+          {
+            name: "One Dose",
+            data: vaccinationOneDose,
           },
-          title: {
-            text:
-              vaccinationOneDose[vaccinationOneDose.length - 1] +
-              vaccinationTwoDose[vaccinationTwoDose.length - 1],
+          {
+            name: "Two Dose",
+            data: vaccinationTwoDose,
           },
+        ],
+        subtitle: {
+          text: [
+            "Vaccine doses administered",
+            `Single Dose: ${vaccinationOneDose[vaccinationOneDose.length - 1]}`,
+            `Both Doses: ${vaccinationTwoDose[vaccinationTwoDose.length - 1]}`,
+          ],
         },
-      ]);
+        title: {
+          text:
+            vaccinationOneDose[vaccinationOneDose.length - 1] +
+            vaccinationTwoDose[vaccinationTwoDose.length - 1],
+        },
+      });
 
       // Update chart5
-      chart5.updateSeries([
-        testsDone[testsDone.length - 1] -
-          confirmedCases[confirmedCases.length - 1],
-        confirmedCases[confirmedCases.length - 1],
-      ]);
-      // FIXME: Not woking
-      chart5.updateOptions([
-        {
-          subtitle: {
-            text: [
-              "Infection Rate:",
-              `${(
-                (confirmedCases[confirmedCases.length - 1] /
-                  testsDone[testsDone.length - 1]) *
-                100
-              ).toFixed(3)} %`,
-            ],
-          },
+      chart5.updateOptions({
+        subtitle: {
+          text: [
+            "Infection Rate:",
+            `${(
+              (confirmedCases[confirmedCases.length - 1] /
+                testsDone[testsDone.length - 1]) *
+              100
+            ).toFixed(3)} %`,
+          ],
         },
-      ]);
+        series: [
+          testsDone[testsDone.length - 1] -
+            confirmedCases[confirmedCases.length - 1],
+          confirmedCases[confirmedCases.length - 1],
+        ],
+      });
     });
   }
 
