@@ -122,7 +122,6 @@ async function getDetails(centerID) {
       .addEventListener("hidden.bs.modal", () => {
         document.querySelector("#confirm-booking").classList.add("disabled");
         bookingDetails = [];
-        appointmmentInfoElement.innerHTML = "";
       });
 
     /** @function
