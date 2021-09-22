@@ -74,14 +74,19 @@ main {
 }
 
 #vaccine-wrapper {
-  flex-wrap: nowrap;
   overflow-x: auto;
 }
 
-.vaccine {
-  flex: 0 0 auto;
-  height: 100%;
-  box-sizing: border-box;
+.vaccine-option {
+  border-bottom: 1px dashed grey;
+}
+
+.vaccine-image {
+  max-height: 25em;
+}
+
+#sputnik-img {
+  width: 60%;
 }
 
 /* styling for calendar */
@@ -115,6 +120,10 @@ main {
 
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+  .vaccine-option {
+    border-bottom: none;
+    border-right: 1px dashed grey;
+  }
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */

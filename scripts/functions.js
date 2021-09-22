@@ -109,7 +109,8 @@ async function getDetails(centerID) {
       var bookedSlot = bookingDetails[bookingDetails.length - 1];
       var bookingInfo =
         `<h5>Booking Successful!</h5>` +
-        `<text class="small">Date:  ${bookedSlot.date}` +
+        `<text class="small">Center: ${data.name}` +
+        `<br>Date:  ${bookedSlot.date}` +
         `<br>Slot: ${bookedSlot.timeSlot}</text>`;
       appointmmentInfoElement.innerHTML = bookingInfo;
       ("");
