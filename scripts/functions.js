@@ -47,9 +47,6 @@ function getCurrentDate() {
 async function getDetails(centerID) {
   var element = document.querySelector("#popup");
 
-  const API_END_POINT_URL_calendarByCenter =
-    "/v2/appointment/sessions/public/calendarByCenter";
-
   var initialData = element.innerHTML;
 
   element.innerHTML = "Loading...";

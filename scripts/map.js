@@ -1,8 +1,5 @@
 // Create map and base tile layer
 
-const mapBoxToken =
-  "pk.eyJ1IjoicHJhdGhlZXNoMSIsImEiOiJja3Q1NzE3b2owNW1uMnVwN3llbmUyajhnIn0.bGFsIBVXDrEsRdacm-aBzg";
-
 /** @function
  * @name createMap
  * Return new map instance given ID, coordinates and zoom*/

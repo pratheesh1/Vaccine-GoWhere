@@ -1,6 +1,3 @@
-//API Base url
-const COWIN_BASE_API_URL = "https://cdn-api.co-vin.in/api";
-const NOMINATIM_BASE_API_URL = "https://nominatim.openstreetmap.org";
 //intiate empty array for heatmap
 var covidData = [];
 
