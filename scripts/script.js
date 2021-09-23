@@ -1,6 +1,8 @@
 //API Base url
 const COWIN_BASE_API_URL = "https://cdn-api.co-vin.in/api";
 const NOMINATIM_BASE_API_URL = "https://nominatim.openstreetmap.org";
+//intiate empty array for heatmap
+var covidData = [];
 
 window.addEventListener("DOMContentLoaded", async () => {
   //create new map
@@ -105,6 +107,25 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   map.addLayer(searchResultsLayer);
 
+  //--------- heatmap layer ---------
+  var heatMapConfig = {
+    radius: 0.4,
+    maxOpacity: 0.3,
+    scaleRadius: true,
+    useLocalExtrema: true,
+    latField: "lat",
+    lngField: "lng",
+    valueField: "count",
+  };
+  var heatmapLayer = new HeatmapOverlay(heatMapConfig);
+
+  var heatmapData = {
+    max: 8,
+    data: covidData,
+  };
+
+  heatmapLayer.setData(heatmapData);
+
   //--------- map layer control ---------
   //on zoom
   map.on("zoom", () => {
@@ -113,13 +134,15 @@ window.addEventListener("DOMContentLoaded", async () => {
       //display on zoom baased on geojson polygon bounds
       return (
         districDataLayer.addTo(districtBoundariesLayer),
-        stateDataLayer.remove(stateBoundariesLayer)
+        stateDataLayer.remove(stateBoundariesLayer),
+        map.addLayer(heatmapLayer)
       );
     }
     //TODO: anymore conditions to add/remove layer add here in if statemets
     return (
       districDataLayer.removeFrom(districtBoundariesLayer),
-      stateDataLayer.addTo(stateBoundariesLayer)
+      stateDataLayer.addTo(stateBoundariesLayer),
+      map.removeLayer(heatmapLayer)
     );
   });
 
@@ -130,6 +153,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     otherLayers = {
       "District Boundaries": districtBoundariesLayer,
       "Vaccination Centers": vacinationCenterLayer,
+      "Covid Clusters": heatmapLayer,
     };
   let controlLayer = L.control.layers(baseLayer, otherLayers, {
     position: "bottomright",
