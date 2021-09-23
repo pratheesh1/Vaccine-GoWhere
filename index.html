@@ -239,7 +239,7 @@
             <!-- statistics -->
             <section
               id="statistics"
-              class="d-none p-0 main-display-element bg-light"
+              class="d-none p-0 main-display-element bg-light position-relative"
             >
               <div class="col text-center px-4 pt-2 px-md-5 py-md-3">
                 <!-- select state -->
@@ -285,6 +285,27 @@
                   </div>
                 </div>
                 <div class="row mt-lg-5">Data @ data.covid19india.org</div>
+              </div>
+              <!-- Spinner -->
+              <div
+                id="spinner-wrapper"
+                class="
+                  h-100
+                  w-100
+                  position-absolute
+                  top-0
+                  start-0
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  d-none
+                "
+              >
+                <div
+                  id="spinner"
+                  class="spinner-border text-primary"
+                  role="status"
+                ></div>
               </div>
             </section>
             <!-- COVID-19 info -->

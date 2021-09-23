@@ -639,6 +639,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     //re-render charts based on selction
     document.querySelector("#select-state").addEventListener("change", () => {
+      var spinnier = document.querySelector("#spinner-wrapper");
+      spinnier.classList.remove("d-none");
       //updateOptions based on state selection
       //removed grouping for using updateOptions. Known apexchart bug
       var {
@@ -743,6 +745,9 @@ document.addEventListener("DOMContentLoaded", async function () {
           confirmedCases[confirmedCases.length - 1],
         ],
       });
+      setTimeout(() => {
+        spinnier.classList.add("d-none");
+      }, 1500);
     });
   }
 
