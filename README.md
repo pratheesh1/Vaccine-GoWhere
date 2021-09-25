@@ -41,7 +41,7 @@ Several user and organizational goals were considered during the development of 
 
 ## 1.2 UX
 
-The project is a professional website that intented for users looking to book vaccination appointments and also further information on the disease, number of cases and current vaccine information. The fonts chosen for the project is therefore a professional looking font with focus on readability. The colours chosen are also to keep to professional theme with no dark colours as far as possible throughout the project.
+The project is a professional website that is intented for users looking to book vaccination appointments and also further information on the disease, number of cases and current vaccine information. The fonts chosen for the project is therefore a professional looking font with focus on readability. The colours chosen are also to keep to professional theme with no dark colours as far as possible throughout the project.
 
 ### Primary font:
 
