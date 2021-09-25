@@ -1,5 +1,9 @@
 # Interactive Frontend Programming
 
+A screenshot of the landing page of the project.
+
+![ screenshot of the landing page of the project.](images/screenshot.png)
+
 # Context
 
 This project focuses on an interactive frontend webpage called **Vaccine GoWhere** for finding COVID-19 vaccination centres all over India. There is currently a lack of centralized and accessibile service for booking an appointment for vaccination. It is also difficult to find a single platform that combines the current COVID-19 clusters data together with nearby vaccination centres, so that a user might want to choose an alternate clinic.
@@ -8,12 +12,12 @@ This website is therefore designed to bring vaccination appointment booking and 
 
 # Index
 
-1. [UX](#ux)
-2. [Technologies Used](#technologies-used)
-3. [Future Features To Implement](#future-features-to-implement)
-4. [Testing](#testing)
-5. [Deployment](#deployment)
-6. [Credits and Acknoledgement](#credits-and-acknowledgement)
+1. [UX](#1-ux)
+2. [Technologies Used](#2-technologies-used)
+3. [Future Features To Implement](#3-future-features-to-implement)
+4. [Testing](#4-testing)
+5. [Deployment](#5-deployment)
+6. [Credits and Acknoledgement](#6-credits-and-acknoledgement)
 
 # 1. UX
 
@@ -63,11 +67,7 @@ Several user and organizational goals were considered during the development of 
 
   This project uses axios JS to handle all API requests.
 
-- [datetime-slot-picker](#https://github.com/cyberabis/datetime-slot-picker)
-
-  This project use datetime-slot-picker, a Web Component used for Date and Time Slot Picker. This is a standalone Web Component built using StencilJS.
-
-# 3. Future Features To Implement
+- [datetime-slot-picker](#https://github.com/cyberabis/datetime-slot-picker)User Experience (UX)
 
 ## 3.1 Additional Features to be implemented in the future
 
@@ -79,7 +79,7 @@ Several user and organizational goals were considered during the development of 
 | 4.     | Dynamic data update for Vaccine and Info sections.                                |
 | 5.     | Automated email notifications for appointment booking.                            |
 
-## 3.2 Features fixes to be implemented
+## 3.2 Feature fixes to be implemented
 
 1. Fix errors when searching for locations on extreme corners of the country with direct land borders to other countries.
 
@@ -87,8 +87,29 @@ Several user and organizational goals were considered during the development of 
 
 # 4. Testing
 
+There is no automated testing for this project. A comprehensive manual testing checklist is developed based on user story the pjoject as outlined below:
+|Number|Feature|Test|Result|
+|---|---|---|---|
+|1.|All-Mobile Responsiveness|Test website on small/iPad/large screen sizes in inspector|Pass|
+|2.|Cross-browser compatibility|Test project on multiple browser|Pass|
+|3.|Load vaccination centre on map|Test marker cluster rendering on multiple browser and screen sizes |Pass|
+|4.|Geocoding search on map|Manually search for multiple loactions across India|(i)Partial|
+|5.|Heatmap rendering on map|Check heramap rendering on map|Pass|
+|6.|Appointment booking system|Book appointmet from multiple vaccination centres on >1 browser and multiple screen sizes|Pass|
+|7.|COVID-19 Info Page|View COVID-19 Info page on >1 browser across screen sizes|Pass|
+|8.|Vaccine Info Page|View Vaccine Info page on >1 browser across screen sizes|Pass|
+|9.|Statistice page|Verify chart rendering on >1 browser and on different screen sizes|Pass|
+|10.|State list selection|Verify chart rendering based on state selection on >1 browser and on different screen sizes|Pass|
+|11.|Read more/Further Info|Test all Read more/Further Info bottons and verify working as intended|Pass|
+
+(i) Searching for locations on extreme corners of the country with direct land borders to other countries result in errors.
+
 # 5. Deployment
 
 This webpage is currently not deployed. However it can be readily deployed using any of the deployment service providers such as Heroku. For basic viewing, this project can also be run with any live server extenstions from most code editors.
 
 # 6. Credits and Acknoledgement
+
+- [COVID19-India API](#https://data.covid19india.org/) for compiling data and making it openly available for developers.
+- [Co-WIN Public APIs](https://apisetu.gov.in/public/marketplace/api/cowin) Government of India public API.
+- [Nominatim](https://nominatim.org/) for Open-source geocoding project.
