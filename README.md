@@ -95,7 +95,9 @@ The project is a professional website that is intented for users looking to book
 
   This project uses axios JS to handle all API requests.
 
-- [datetime-slot-picker](#https://github.com/cyberabis/datetime-slot-picker)User Experience (UX)
+- [datetime-slot-picker](#https://github.com/cyberabis/datetime-slot-picker)
+
+  This project use datetime-slot-picker, a Web Component used for Date and Time Slot Picker. This is a standalone Web Component built using StencilJS.
 
 ## 3.1 Additional Features to be implemented in the future
 
