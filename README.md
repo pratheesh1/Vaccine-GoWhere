@@ -67,35 +67,35 @@ The project is a professional website that is intented for users looking to book
 
 # 2. Technologies Used
 
-- [HTML5](#https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
+- [HTML5](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 
   The project uses HTML5 to structure the content of the website.
 
-- [CSS](#https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
   The project uses CSS to add stylistic touches to the website.
 
-- [Bootstrap v5.0.2](#https://getbootstrap.com/docs/5.1/getting-started/introduction/)
+- [Bootstrap v5.0.2](https://getbootstrap.com/docs/5.1/getting-started/introduction/)
 
   The project uses Bootstrap to structure the layout of the website (e.g. responsive column, containers etc.) and ensure website is mobile responsive.
 
-- [GoogleFonts](#https://fonts.google.com/)
+- [GoogleFonts](https://fonts.google.com/)
 
   The project uses GoogleFonts to style the typography on the website to enhance the visual experience of users.
 
-- [Font Awesome v5.15.4](#https://fontawesome.com/)
+- [Font Awesome v5.15.4](https://fontawesome.com/)
 
   The project uses the icons provided by FontAwesome alongside call-to-action buttons and navigation-menu-items to enhance the user experience by making user interaction with the application more intuitive.
 
-- [Leaflet JS](#https://leafletjs.com/)
+- [Leaflet JS](https://leafletjs.com/)
 
-  This project uses leaflet JS, an open-source JavaScript library for mobile-friendly interactive map. It also uses [Leaflet.MarkerCluster](#https://github.com/Leaflet/Leaflet.markercluster) for intractive marker clustering and [leaflet-heatmap](#https://leafletjs.com/plugins.html#heatmaps) together with [heatmap.js](#https://www.patrick-wied.at/static/heatmapjs/) for plotting interactive heatmaps.
+  This project uses leaflet JS, an open-source JavaScript library for mobile-friendly interactive map. It also uses [Leaflet.MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster) for intractive marker clustering and [leaflet-heatmap](https://leafletjs.com/plugins.html#heatmaps) together with [heatmap.js](https://www.patrick-wied.at/static/heatmapjs/) for plotting interactive heatmaps.
 
-- [Axios](#https://github.com/axios/axios)
+- [Axios](https://github.com/axios/axios)
 
   This project uses axios JS to handle all API requests.
 
-- [datetime-slot-picker](#https://github.com/cyberabis/datetime-slot-picker)
+- [datetime-slot-picker](https://github.com/cyberabis/datetime-slot-picker)
 
   This project use datetime-slot-picker, a Web Component used for Date and Time Slot Picker. This is a standalone Web Component built using StencilJS.
 
