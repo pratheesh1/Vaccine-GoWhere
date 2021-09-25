@@ -12,16 +12,18 @@ This website is therefore designed to bring vaccination appointment booking and 
 
 # Index
 
-1. [UX](#1-ux)
+1. [UI/UX](#1.1-ui)
 2. [Technologies Used](#2-technologies-used)
 3. [Future Features To Implement](#3-future-features-to-implement)
 4. [Testing](#4-testing)
 5. [Deployment](#5-deployment)
 6. [Credits and Acknoledgement](#6-credits-and-acknoledgement)
 
-# 1. UX
+# 1. UI/UX
 
-## 1.1 Project Strategy
+## 1.1 UI
+
+### a. Project Strategy
 
 Several user and organizational goals were considered during the development of this project. A user story-case study was done for selecting the features to be implemented for the project and is summarized below:
 
@@ -36,6 +38,32 @@ Several user and organizational goals were considered during the development of 
 | User want to view reported infection, recovery, death and vacination numbers in the contry. | Statistics page.                                                         |
 | User want information on state-level statistics.                                            | State selection list and rerender of statistics page based on selection. |
 | More information is required by the user.                                                   | Read more/Further Info navigation whereever possible.                    |
+
+## 1.2 UX
+
+The project is a professional website that intented for users looking to book vaccination appointments and also further information on the disease, number of cases and current vaccine information. The fonts chosen for the project is therefore a professional looking font with focus on readability. The colours chosen are also to keep to professional theme with no dark colours as far as possible throughout the project.
+
+### Primary font:
+
+```
+  font-family: 'Kaisei Tokumin';
+  font-style: normal;
+  font-weight: 400;
+```
+
+### Secondary font:
+
+```
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+```
+
+### Prominent colours:
+
+```
+#f8f9fa #0000ff #f0f4f7 #212529
+```
 
 # 2. Technologies Used
 
