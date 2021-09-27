@@ -99,6 +99,8 @@ The project is a professional website that is intented for users looking to book
 
   This project use datetime-slot-picker, a Web Component used for Date and Time Slot Picker. This is a standalone Web Component built using StencilJS.
 
+# 3. Future Features To Implement
+
 ## 3.1 Additional Features to be implemented in the future
 
 | Number | Feature                                                                           |
