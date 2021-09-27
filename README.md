@@ -12,7 +12,7 @@ This website is therefore designed to bring vaccination appointment booking and 
 
 # Index
 
-1. [UI/UX](#1.1-ui)
+1. [UI/UX](#1-uiux)
 2. [Technologies Used](#2-technologies-used)
 3. [Future Features To Implement](#3-future-features-to-implement)
 4. [Testing](#4-testing)
