@@ -119,7 +119,7 @@ The project is a professional website that is intented for users looking to book
 
 # 4. Testing
 
-There is no automated testing for this project. A comprehensive manual testing checklist is developed based on user story the pjoject as outlined below:
+There is no automated testing for this project. A comprehensive manual testing checklist is developed based on user story for the pjoject as outlined below:
 |Number|Feature|Test|Result|
 |---|---|---|---|
 |1.|All-Mobile Responsiveness|Test website on small/iPad/large screen sizes in inspector|Pass|
@@ -142,6 +142,6 @@ This webpage is currently not deployed. However it can be readily deployed using
 
 # 6. Credits and Acknoledgement
 
-- [COVID19-India API](#https://data.covid19india.org/) for compiling data and making it openly available for developers.
+- [COVID19-India API](https://data.covid19india.org/) for compiling data and making it openly available for developers.
 - [Co-WIN Public APIs](https://apisetu.gov.in/public/marketplace/api/cowin) Government of India public API.
 - [Nominatim](https://nominatim.org/) for Open-source geocoding project.
