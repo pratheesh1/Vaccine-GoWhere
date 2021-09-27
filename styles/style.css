@@ -3,13 +3,9 @@
 
 /* --------- root styling and global variables --------- */
 :root {
-  /* TODO: need clean-up for unused and test variables*/
   /* CSS Global variables */
-  --test-primary-color: turquoise;
-  --test-secondary-color: blue;
   /* col-2 based on bootstrap xs breakpoint */
   --xs-adjust-height: 58px;
-  /* CSS root styling */
 }
 
 /* --------- CSS for all elemets --------- */
@@ -36,13 +32,6 @@ main {
   height: calc(100vh - var(--xs-adjust-height));
 }
 
-#floating-search {
-  position: absolute;
-  top: 11px;
-  left: 35px;
-  z-index: 1001;
-}
-
 #spinner-wrapper {
   background-color: grey;
   opacity: 0.8;
@@ -57,6 +46,14 @@ main {
 .search {
   position: relative;
 }
+
+#floating-search {
+  position: absolute;
+  top: 11px;
+  left: 35px;
+  z-index: 1001;
+}
+
 .search button {
   position: absolute;
   top: 1px;
@@ -74,6 +71,13 @@ main {
   border-radius: 0 0 5px 5px;
   max-height: 70vh;
   font-size: 14px;
+}
+
+.legend-area {
+  position: absolute;
+  bottom: 11px;
+  left: 35px;
+  z-index: 1001;
 }
 
 #vaccine-image {

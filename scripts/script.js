@@ -113,13 +113,54 @@ window.addEventListener("DOMContentLoaded", async () => {
     latField: "lat",
     lngField: "lng",
     valueField: "count",
+    onExtremaChange: function (data) {
+      updateLegend(data);
+    },
   };
   var heatmapLayer = new HeatmapOverlay(heatMapConfig);
-
   var heatmapData = {
     max: 8,
     data: covidData,
   };
+
+  //create canvas element for legend gradient img
+  var legendCanvas = document.createElement("canvas");
+  legendCanvas.width = 100;
+  legendCanvas.height = 10;
+  var min = document.querySelector("#min");
+  var max = document.querySelector("#max");
+  var gradientImg = document.querySelector("#gradient");
+  var legendCtx = legendCanvas.getContext("2d");
+  var gradientCfg = {};
+
+  /** @function
+   * @name updateLegend
+   * Update heatmap legend*/
+  function updateLegend(data) {
+    var heatmapLegend = document.querySelector("#heatmap-legend");
+    // the onExtremaChange callback gives min, max, and gradientConfig
+    min.innerHTML = data.min;
+    max.innerHTML = data.max;
+
+    // regenerate gradient image
+    if (data.gradient != gradientCfg) {
+      gradientCfg = data.gradient;
+      var gradient = legendCtx.createLinearGradient(0, 0, 100, 1);
+      for (var key in gradientCfg) {
+        gradient.addColorStop(key, gradientCfg[key]);
+      }
+      legendCtx.fillStyle = gradient;
+      legendCtx.fillRect(0, 0, 100, 10);
+      gradientImg.src = legendCanvas.toDataURL();
+    }
+
+    //hide legend if no valid extrema data
+    if (data.max) {
+      heatmapLegend.classList.remove("d-none");
+    } else {
+      heatmapLegend.classList.add("d-none");
+    }
+  }
 
   heatmapLayer.setData(heatmapData);
 
@@ -135,7 +176,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         map.addLayer(heatmapLayer)
       );
     }
-    //TODO: anymore conditions to add/remove layer add here in if statemets
     return (
       districDataLayer.removeFrom(districtBoundariesLayer),
       stateDataLayer.addTo(stateBoundariesLayer),
@@ -156,6 +196,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     position: "bottomright",
   });
   controlLayer.addTo(map);
+
+  //add-remove heatmap legend based on user selection
+  map.on("overlayadd", function (layer) {
+    if (layer.name === "Covid Clusters") {
+      document.querySelector("#heatmap-legend").classList.remove("d-none");
+    }
+  });
+  map.on("overlayremove", function (layer) {
+    if (layer.name === "Covid Clusters") {
+      document.querySelector("#heatmap-legend").classList.add("d-none");
+    }
+  });
 
   //--------- map element  ---------
 
