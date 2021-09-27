@@ -138,7 +138,8 @@ There is no automated testing for this project. A comprehensive manual testing c
 
 # 5. Deployment
 
-This webpage is currently not deployed. However it can be readily deployed using any of the deployment service providers such as Heroku. For basic viewing, this project can also be run with any live server extenstions from most code editors.
+This webpage is currently deployed at:
+[https://fervent-minsky-2b88d0.netlify.app/](https://fervent-minsky-2b88d0.netlify.app/#)
 
 # 6. Credits and Acknoledgement
 
