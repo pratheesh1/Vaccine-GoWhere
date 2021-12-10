@@ -17,7 +17,7 @@ This website is therefore designed to bring vaccination appointment booking and 
 3. [Future Features To Implement](#3-future-features-to-implement)
 4. [Testing](#4-testing)
 5. [Deployment](#5-deployment)
-6. [Credits and Acknoledgement](#6-credits-and-acknoledgement)
+6. [Credits and Acknowledgement](#6-credits-and-acknowledgement)
 
 # 1. UI/UX
 
@@ -141,7 +141,7 @@ There is no automated testing for this project. A comprehensive manual testing c
 This webpage is currently deployed at:
 [https://fervent-minsky-2b88d0.netlify.app/](https://fervent-minsky-2b88d0.netlify.app/#)
 
-# 6. Credits and Acknoledgement
+# 6. Credits and Acknowledgement
 
 - [COVID19-India API](https://data.covid19india.org/) for compiling data and making it openly available for developers.
 - [Co-WIN Public APIs](https://apisetu.gov.in/public/marketplace/api/cowin) Government of India public API.
